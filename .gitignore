@@ -37,3 +37,4 @@ payload.json
 
 .qmake.stash
 /app/Joker/build
+/Joker/.qtc_clangd
