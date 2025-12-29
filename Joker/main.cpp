@@ -47,10 +47,10 @@ int main(int argc, char *argv[])
 	}
 	a.installTranslator(&translator);
 
-	if(!settings.exitedNormaly()) {
-		PhFeedbackDialog dlg(&settings);
-		dlg.exec();
-	}
+	// if(!settings.exitedNormaly()) {
+	// 	PhFeedbackDialog dlg(&settings);
+	// 	dlg.exec();
+	// }
 
 	settings.setExitedNormaly(false);
 

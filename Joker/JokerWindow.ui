@@ -592,7 +592,7 @@
   <customwidget>
    <class>PhHelpMenu</class>
    <extends>QMenu</extends>
-   <header>../../libs/PhCommonUI/PhHelpMenu.h</header>
+   <header>PhCommonUI/PhHelpMenu.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

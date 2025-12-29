@@ -17,7 +17,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "../../libs/PhCommonUI/PhHelpMenu.h"
+#include "PhCommonUI/PhHelpMenu.h"
 #include "PhGraphic/PhGraphicView.h"
 
 QT_BEGIN_NAMESPACE

@@ -13,9 +13,26 @@ UI_DIR = build/ui
 RCC_DIR = build/rcc
 OBJECTS_DIR = build/obj
 
-TOP_ROOT = $${_PRO_FILE_PWD_}/../..
+TOP_ROOT = $${_PRO_FILE_PWD_}
 
-include($$TOP_ROOT/common/common.pri)
+unix {
+    CS = ;
+    RESOURCES_PATH = $$OUT_PWD/data
+    QMAKE_POST_LINK += mkdir -p $$RESOURCES_PATH $$CS
+}
+win32 {
+    CS = &
+    RESOURCES_PATH = $$OUT_PWD/data
+    QMAKE_POST_LINK += if not exist $$RESOURCES_PATH mkdir $$RESOURCES_PATH $$CS
+}
+
+QT += widgets
+
+INCLUDEPATH += $$TOP_ROOT/libs
+
+DEFINES += PH_ORG_NAME=\\\"Phonations\\\" PH_APP_NAME=\\\"Joker\\\" PH_FULL_VERSION=\\\"1.0.0\\\" PATH_TO_RESSOURCES=\\\"/data\\\" PH_GIT_REVISION=\\\"unknown\\\"
+
+# include($$TOP_ROOT/common/common.pri)
 
 include($$TOP_ROOT/libs/PhTools/PhTools.pri)
 include($$TOP_ROOT/libs/PhCommonUI/PhCommonUI.pri)
@@ -116,7 +133,7 @@ QMAKE_POST_LINK += lrelease $${_PRO_FILE_PWD_}/fr_FR.ts -qm $${RESOURCES_PATH}/f
 
 QMAKE_POST_LINK += echo "Translation ok" $${CS}
 PH_DEPLOY_LOCATION = $$(JOKER_RELEASE_PATH)
-include($$TOP_ROOT/common/deploy.pri)
+# include($$TOP_ROOT/common/deploy.pri)
 
 cache()
 

@@ -15,7 +15,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
-#include "../../libs/PhCommonUI/PhTimeCodeEdit.h"
+#include "PhCommonUI/PhTimeCodeEdit.h"
 
 QT_BEGIN_NAMESPACE
 
