@@ -8,6 +8,11 @@ cache()
 
 TARGET = Joker
 
+MOC_DIR = build/moc
+UI_DIR = build/ui
+RCC_DIR = build/rcc
+OBJECTS_DIR = build/obj
+
 TOP_ROOT = $${_PRO_FILE_PWD_}/../..
 
 include($$TOP_ROOT/common/common.pri)

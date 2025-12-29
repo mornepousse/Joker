@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DPH_FULL_VERSION=\"_\" -DPH_APP_NAME=\"Joker\" -DPH_ORG_NAME=\"Phonations\" -DPH_GIT_REVISION=\"\" -DPATH_TO_RESSOURCES=\"\" -DUSE_VIDEO -DUSE_LTC -DUSE_MIDI -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_CORE_LIB
+DEFINES       = -DPH_FULL_VERSION=\"v1.1.3-2291-gf93179a8-dirty\" -DPH_APP_NAME=\"Joker\" -DPH_ORG_NAME=\"Phonations\" -DPH_GIT_REVISION=\"f93179a88bba5378672bf2332b6be39f772cb29c\" -DPATH_TO_RESSOURCES=\"\" -DUSE_VIDEO -DUSE_LTC -DUSE_MIDI -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -flto -fno-fat-lto-objects -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -std=gnu++11 -flto -fno-fat-lto-objects -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I. -I. -I/usr/lib/qt/mkspecs/linux-g++
+INCPATH       = -I. -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -Ibuild/moc -Ibuild/ui -I/usr/lib/qt/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,11 +36,11 @@ DEL_DIR       = rmdir
 MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
-DISTNAME      = Joker1.0.0
-DISTDIR = /home/mae/Downloads/Joker-master/app/Joker/.tmp/Joker1.0.0
+DISTNAME      = Jokerv1.1.3
+DISTDIR = /home/mae/Documents/GitHub/Joker/app/Joker/build/obj/Jokerv1.1.3
 LINK          = g++
 LFLAGS        = -Wl,-O1 -pipe -O2 -std=gnu++11 -flto=12 -fno-fat-lto-objects -fuse-linker-plugin -fPIC
-LIBS          = $(SUBLIBS) -L/usr/local/lib -L/usr/lib /usr/lib/ffmpeg4.4/libavformat.so /usr/lib/ffmpeg4.4/libavcodec.so /usr/lib/ffmpeg4.4/libavutil.so /usr/lib/ffmpeg4.4/libswscale.so -lportaudio -lltc -lrtmidi /usr/lib/libQt5OpenGL.so /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Network.so /usr/lib/libQt5Xml.so /usr/lib/libQt5Sql.so /usr/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) -L/usr/local/lib -L/usr/lib -lavformat -lavcodec -lavutil -lswscale -lportaudio -lltc -lrtmidi /usr/lib/libQt5OpenGL.so /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Network.so /usr/lib/libQt5Xml.so /usr/lib/libQt5Sql.so /usr/lib/libQt5Core.so -lGL -lpthread   
 AR            = gcc-ar cqs
 RANLIB        = 
 SED           = sed
@@ -48,66 +48,66 @@ STRIP         = strip
 
 ####### Output directory
 
-OBJECTS_DIR   = ./
+OBJECTS_DIR   = build/obj/
 
 ####### Files
 
-SOURCES       = /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.cpp \
+SOURCES       = /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.cpp \
 		main.cpp \
 		JokerWindow.cpp \
 		AboutDialog.cpp \
@@ -117,217 +117,217 @@ SOURCES       = /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.cpp \
 		PeopleEditionDialog.cpp \
 		TimeBetweenTwoFeetDialog.cpp \
 		SecondScreenWindow.cpp \
-		TextDialog.cpp qrc_PhCommonUI.cpp \
-		qrc_Joker.cpp \
-		moc_PhGenericSettings.cpp \
-		moc_PhMediaPanel.cpp \
-		moc_PhTimeCodeEdit.cpp \
-		moc_PhTimeCodeDialog.cpp \
-		moc_PhFloatingMediaPanel.cpp \
-		moc_PhWindow.cpp \
-		moc_PhDocumentWindow.cpp \
-		moc_PhEditableDocumentWindow.cpp \
-		moc_PhLockableSpinBox.cpp \
-		moc_PhFeedbackDialog.cpp \
-		moc_PhDialogButtonBox.cpp \
-		moc_PhStripDoc.cpp \
-		moc_PhGraphicView.cpp \
-		moc_PhGraphicStrip.cpp \
-		moc_PhClock.cpp \
-		moc_PhSynchronizer.cpp \
-		moc_PhVideoEngine.cpp \
-		moc_PhVideoDecoder.cpp \
-		moc_PhVideoPool.cpp \
-		moc_PhAudio.cpp \
-		moc_PhAudioInput.cpp \
-		moc_PhLtcReader.cpp \
-		moc_PhLtcWriter.cpp \
-		moc_PhMidiObject.cpp \
-		moc_PhMidiInput.cpp \
-		moc_PhMidiOutput.cpp \
-		moc_PhMidiTimeCodeWriter.cpp \
-		moc_PhMidiTimeCodeReader.cpp \
-		moc_JokerWindow.cpp \
-		moc_AboutDialog.cpp \
-		moc_PreferencesDialog.cpp \
-		moc_PropertyDialog.cpp \
-		moc_PeopleDialog.cpp \
-		moc_PeopleEditionDialog.cpp \
-		moc_TimeBetweenTwoFeetDialog.cpp \
-		moc_SecondScreenWindow.cpp \
-		moc_TextDialog.cpp
-OBJECTS       = PhDebug.o \
-		PhTickCounter.o \
-		PhPictureTools.o \
-		PhFileTool.o \
-		PhGenericSettings.o \
-		PhMediaPanel.o \
-		PhTimeCodeEdit.o \
-		PhTimeCodeDialog.o \
-		PhFloatingMediaPanel.o \
-		PhWindow.o \
-		PhDocumentWindow.o \
-		PhEditableDocumentWindow.o \
-		PhLockableSpinBox.o \
-		PhFeedbackDialog.o \
-		PhDialogButtonBox.o \
-		PhHelpMenu.o \
-		PhStripDoc.o \
-		PhStripObject.o \
-		PhStripCut.o \
-		PhStripText.o \
-		PhStripLoop.o \
-		PhPeople.o \
-		PhStripPeopleObject.o \
-		PhStripDetect.o \
-		PhStripSentence.o \
-		PhGraphicView.o \
-		PhGraphicImage.o \
-		PhGraphicText.o \
-		PhGraphicTexturedRect.o \
-		PhFont.o \
-		PhGraphicObject.o \
-		PhGraphicRect.o \
-		PhGraphicSolidRect.o \
-		PhGraphicLoop.o \
-		PhGraphicDisc.o \
-		PhGraphicDashedLine.o \
-		PhGraphicArrow.o \
-		PhGraphicStrip.o \
-		PhTimeCode.o \
-		PhClock.o \
-		PhSynchronizer.o \
-		PhVideoEngine.o \
-		PhVideoDecoder.o \
-		PhVideoBuffer.o \
-		PhVideoPool.o \
-		PhVideoRect.o \
-		PhAudio.o \
-		PhAudioOutput.o \
-		PhAudioInput.o \
-		PhLtcReader.o \
-		PhLtcWriter.o \
-		PhMidiObject.o \
-		PhMidiInput.o \
-		PhMidiOutput.o \
-		PhMidiTimeCodeWriter.o \
-		PhMidiTimeCodeReader.o \
-		main.o \
-		JokerWindow.o \
-		AboutDialog.o \
-		PreferencesDialog.o \
-		PropertyDialog.o \
-		PeopleDialog.o \
-		PeopleEditionDialog.o \
-		TimeBetweenTwoFeetDialog.o \
-		SecondScreenWindow.o \
-		TextDialog.o \
-		qrc_PhCommonUI.o \
-		qrc_Joker.o \
-		moc_PhGenericSettings.o \
-		moc_PhMediaPanel.o \
-		moc_PhTimeCodeEdit.o \
-		moc_PhTimeCodeDialog.o \
-		moc_PhFloatingMediaPanel.o \
-		moc_PhWindow.o \
-		moc_PhDocumentWindow.o \
-		moc_PhEditableDocumentWindow.o \
-		moc_PhLockableSpinBox.o \
-		moc_PhFeedbackDialog.o \
-		moc_PhDialogButtonBox.o \
-		moc_PhStripDoc.o \
-		moc_PhGraphicView.o \
-		moc_PhGraphicStrip.o \
-		moc_PhClock.o \
-		moc_PhSynchronizer.o \
-		moc_PhVideoEngine.o \
-		moc_PhVideoDecoder.o \
-		moc_PhVideoPool.o \
-		moc_PhAudio.o \
-		moc_PhAudioInput.o \
-		moc_PhLtcReader.o \
-		moc_PhLtcWriter.o \
-		moc_PhMidiObject.o \
-		moc_PhMidiInput.o \
-		moc_PhMidiOutput.o \
-		moc_PhMidiTimeCodeWriter.o \
-		moc_PhMidiTimeCodeReader.o \
-		moc_JokerWindow.o \
-		moc_AboutDialog.o \
-		moc_PreferencesDialog.o \
-		moc_PropertyDialog.o \
-		moc_PeopleDialog.o \
-		moc_PeopleEditionDialog.o \
-		moc_TimeBetweenTwoFeetDialog.o \
-		moc_SecondScreenWindow.o \
-		moc_TextDialog.o
+		TextDialog.cpp build/rcc/qrc_PhCommonUI.cpp \
+		build/rcc/qrc_Joker.cpp \
+		build/moc/moc_PhGenericSettings.cpp \
+		build/moc/moc_PhMediaPanel.cpp \
+		build/moc/moc_PhTimeCodeEdit.cpp \
+		build/moc/moc_PhTimeCodeDialog.cpp \
+		build/moc/moc_PhFloatingMediaPanel.cpp \
+		build/moc/moc_PhWindow.cpp \
+		build/moc/moc_PhDocumentWindow.cpp \
+		build/moc/moc_PhEditableDocumentWindow.cpp \
+		build/moc/moc_PhLockableSpinBox.cpp \
+		build/moc/moc_PhFeedbackDialog.cpp \
+		build/moc/moc_PhDialogButtonBox.cpp \
+		build/moc/moc_PhStripDoc.cpp \
+		build/moc/moc_PhGraphicView.cpp \
+		build/moc/moc_PhGraphicStrip.cpp \
+		build/moc/moc_PhClock.cpp \
+		build/moc/moc_PhSynchronizer.cpp \
+		build/moc/moc_PhVideoEngine.cpp \
+		build/moc/moc_PhVideoDecoder.cpp \
+		build/moc/moc_PhVideoPool.cpp \
+		build/moc/moc_PhAudio.cpp \
+		build/moc/moc_PhAudioInput.cpp \
+		build/moc/moc_PhLtcReader.cpp \
+		build/moc/moc_PhLtcWriter.cpp \
+		build/moc/moc_PhMidiObject.cpp \
+		build/moc/moc_PhMidiInput.cpp \
+		build/moc/moc_PhMidiOutput.cpp \
+		build/moc/moc_PhMidiTimeCodeWriter.cpp \
+		build/moc/moc_PhMidiTimeCodeReader.cpp \
+		build/moc/moc_JokerWindow.cpp \
+		build/moc/moc_AboutDialog.cpp \
+		build/moc/moc_PreferencesDialog.cpp \
+		build/moc/moc_PropertyDialog.cpp \
+		build/moc/moc_PeopleDialog.cpp \
+		build/moc/moc_PeopleEditionDialog.cpp \
+		build/moc/moc_TimeBetweenTwoFeetDialog.cpp \
+		build/moc/moc_SecondScreenWindow.cpp \
+		build/moc/moc_TextDialog.cpp
+OBJECTS       = build/obj/PhDebug.o \
+		build/obj/PhTickCounter.o \
+		build/obj/PhPictureTools.o \
+		build/obj/PhFileTool.o \
+		build/obj/PhGenericSettings.o \
+		build/obj/PhMediaPanel.o \
+		build/obj/PhTimeCodeEdit.o \
+		build/obj/PhTimeCodeDialog.o \
+		build/obj/PhFloatingMediaPanel.o \
+		build/obj/PhWindow.o \
+		build/obj/PhDocumentWindow.o \
+		build/obj/PhEditableDocumentWindow.o \
+		build/obj/PhLockableSpinBox.o \
+		build/obj/PhFeedbackDialog.o \
+		build/obj/PhDialogButtonBox.o \
+		build/obj/PhHelpMenu.o \
+		build/obj/PhStripDoc.o \
+		build/obj/PhStripObject.o \
+		build/obj/PhStripCut.o \
+		build/obj/PhStripText.o \
+		build/obj/PhStripLoop.o \
+		build/obj/PhPeople.o \
+		build/obj/PhStripPeopleObject.o \
+		build/obj/PhStripDetect.o \
+		build/obj/PhStripSentence.o \
+		build/obj/PhGraphicView.o \
+		build/obj/PhGraphicImage.o \
+		build/obj/PhGraphicText.o \
+		build/obj/PhGraphicTexturedRect.o \
+		build/obj/PhFont.o \
+		build/obj/PhGraphicObject.o \
+		build/obj/PhGraphicRect.o \
+		build/obj/PhGraphicSolidRect.o \
+		build/obj/PhGraphicLoop.o \
+		build/obj/PhGraphicDisc.o \
+		build/obj/PhGraphicDashedLine.o \
+		build/obj/PhGraphicArrow.o \
+		build/obj/PhGraphicStrip.o \
+		build/obj/PhTimeCode.o \
+		build/obj/PhClock.o \
+		build/obj/PhSynchronizer.o \
+		build/obj/PhVideoEngine.o \
+		build/obj/PhVideoDecoder.o \
+		build/obj/PhVideoBuffer.o \
+		build/obj/PhVideoPool.o \
+		build/obj/PhVideoRect.o \
+		build/obj/PhAudio.o \
+		build/obj/PhAudioOutput.o \
+		build/obj/PhAudioInput.o \
+		build/obj/PhLtcReader.o \
+		build/obj/PhLtcWriter.o \
+		build/obj/PhMidiObject.o \
+		build/obj/PhMidiInput.o \
+		build/obj/PhMidiOutput.o \
+		build/obj/PhMidiTimeCodeWriter.o \
+		build/obj/PhMidiTimeCodeReader.o \
+		build/obj/main.o \
+		build/obj/JokerWindow.o \
+		build/obj/AboutDialog.o \
+		build/obj/PreferencesDialog.o \
+		build/obj/PropertyDialog.o \
+		build/obj/PeopleDialog.o \
+		build/obj/PeopleEditionDialog.o \
+		build/obj/TimeBetweenTwoFeetDialog.o \
+		build/obj/SecondScreenWindow.o \
+		build/obj/TextDialog.o \
+		build/obj/qrc_PhCommonUI.o \
+		build/obj/qrc_Joker.o \
+		build/obj/moc_PhGenericSettings.o \
+		build/obj/moc_PhMediaPanel.o \
+		build/obj/moc_PhTimeCodeEdit.o \
+		build/obj/moc_PhTimeCodeDialog.o \
+		build/obj/moc_PhFloatingMediaPanel.o \
+		build/obj/moc_PhWindow.o \
+		build/obj/moc_PhDocumentWindow.o \
+		build/obj/moc_PhEditableDocumentWindow.o \
+		build/obj/moc_PhLockableSpinBox.o \
+		build/obj/moc_PhFeedbackDialog.o \
+		build/obj/moc_PhDialogButtonBox.o \
+		build/obj/moc_PhStripDoc.o \
+		build/obj/moc_PhGraphicView.o \
+		build/obj/moc_PhGraphicStrip.o \
+		build/obj/moc_PhClock.o \
+		build/obj/moc_PhSynchronizer.o \
+		build/obj/moc_PhVideoEngine.o \
+		build/obj/moc_PhVideoDecoder.o \
+		build/obj/moc_PhVideoPool.o \
+		build/obj/moc_PhAudio.o \
+		build/obj/moc_PhAudioInput.o \
+		build/obj/moc_PhLtcReader.o \
+		build/obj/moc_PhLtcWriter.o \
+		build/obj/moc_PhMidiObject.o \
+		build/obj/moc_PhMidiInput.o \
+		build/obj/moc_PhMidiOutput.o \
+		build/obj/moc_PhMidiTimeCodeWriter.o \
+		build/obj/moc_PhMidiTimeCodeReader.o \
+		build/obj/moc_JokerWindow.o \
+		build/obj/moc_AboutDialog.o \
+		build/obj/moc_PreferencesDialog.o \
+		build/obj/moc_PropertyDialog.o \
+		build/obj/moc_PeopleDialog.o \
+		build/obj/moc_PeopleEditionDialog.o \
+		build/obj/moc_TimeBetweenTwoFeetDialog.o \
+		build/obj/moc_SecondScreenWindow.o \
+		build/obj/moc_TextDialog.o
 DIST          = .qmake.stash \
-		Joker.pro /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h \
+		Joker.pro /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h \
 		JokerWindow.h \
 		AboutDialog.h \
 		PreferencesDialog.h \
@@ -337,62 +337,62 @@ DIST          = .qmake.stash \
 		PeopleEditionDialog.h \
 		TimeBetweenTwoFeetDialog.h \
 		SecondScreenWindow.h \
-		TextDialog.h /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.cpp \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.cpp \
+		TextDialog.h /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.cpp \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.cpp \
 		main.cpp \
 		JokerWindow.cpp \
 		AboutDialog.cpp \
@@ -411,9 +411,9 @@ TARGET        = Joker
 first: all
 ####### Build rules
 
-Joker: ui_PhMediaPanel.h ui_PhTimeCodeDialog.h ui_PhFeedbackDialog.h ui_JokerWindow.h ui_AboutDialog.h ui_PreferencesDialog.h ui_PropertyDialog.h ui_PeopleDialog.h ui_PeopleEditionDialog.h ui_TimeBetweenTwoFeetDialog.h ui_TextDialog.h $(OBJECTS)  
+Joker: build/ui/ui_PhMediaPanel.h build/ui/ui_PhTimeCodeDialog.h build/ui/ui_PhFeedbackDialog.h build/ui/ui_JokerWindow.h build/ui/ui_AboutDialog.h build/ui/ui_PreferencesDialog.h build/ui/ui_PropertyDialog.h build/ui/ui_PeopleDialog.h build/ui/ui_PeopleEditionDialog.h build/ui/ui_TimeBetweenTwoFeetDialog.h build/ui/ui_TextDialog.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
-	cp -f /home/mae/Downloads/Joker-master/app/Joker/../../data/img/joker.png ./ ; cp -f /home/mae/Downloads/Joker-master/app/Joker/../../data/img/phonationsBlack.png ./ ; cp -f /home/mae/Downloads/Joker-master/app/Joker/../../data/img/motif-240.png ./ ; cp -f /home/mae/Downloads/Joker-master/app/Joker/../../data/img/motif-240_black.png ./ ; cp -f /home/mae/Downloads/Joker-master/app/Joker/../../data/fonts/Cappella-Regular.ttf ./ ; cp -f /home/mae/Downloads/Joker-master/app/Joker/../../data/fonts/Bookerly-BoldItalic.ttf ./ ; lrelease /home/mae/Downloads/Joker-master/app/Joker/fr_FR.ts -qm .//fr_FR.qm ; echo Translation ok ; echo Joker build ok ;
+	cp -f /home/mae/Documents/GitHub/Joker/app/Joker/../../data/img/joker.png ./ ; cp -f /home/mae/Documents/GitHub/Joker/app/Joker/../../data/img/phonationsBlack.png ./ ; cp -f /home/mae/Documents/GitHub/Joker/app/Joker/../../data/img/motif-240.png ./ ; cp -f /home/mae/Documents/GitHub/Joker/app/Joker/../../data/img/motif-240_black.png ./ ; cp -f /home/mae/Documents/GitHub/Joker/app/Joker/../../data/fonts/Cappella-Regular.ttf ./ ; cp -f /home/mae/Documents/GitHub/Joker/app/Joker/../../data/fonts/Bookerly-BoldItalic.ttf ./ ; lrelease /home/mae/Documents/GitHub/Joker/app/Joker/fr_FR.ts -qm .//fr_FR.qm ; echo Translation ok ; echo Joker build ok ;
 
 Makefile: Joker.pro .qmake.cache /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
@@ -569,18 +569,18 @@ Makefile: Joker.pro .qmake.cache /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/l
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
-		/home/mae/Downloads/Joker-master/common/common.pri \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTools.pri \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhCommonUI.pri \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStrip.pri \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphic.pri \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.pri \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSync.pri \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideo.pri \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.pri \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtc.pri \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidi.pri \
-		/home/mae/Downloads/Joker-master/common/deploy.pri \
+		/home/mae/Documents/GitHub/Joker/common/common.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTools.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhCommonUI.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStrip.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphic.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSync.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideo.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtc.pri \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidi.pri \
+		/home/mae/Documents/GitHub/Joker/common/deploy.pri \
 		/usr/lib/qt/mkspecs/features/resolve_config.prf \
 		/usr/lib/qt/mkspecs/features/default_post.prf \
 		/usr/lib/qt/mkspecs/features/link_ltcg.prf \
@@ -600,7 +600,7 @@ Makefile: Joker.pro .qmake.cache /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/l
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
 		Joker.pro \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhCommonUI.qrc \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhCommonUI.qrc \
 		Joker.qrc
 	$(QMAKE) -o Makefile Joker.pro
 /usr/lib/qt/mkspecs/features/spec_pre.prf:
@@ -757,18 +757,18 @@ Makefile: Joker.pro .qmake.cache /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/l
 /usr/lib/qt/mkspecs/features/exclusive_builds.prf:
 /usr/lib/qt/mkspecs/features/toolchain.prf:
 /usr/lib/qt/mkspecs/features/default_pre.prf:
-/home/mae/Downloads/Joker-master/common/common.pri:
-/home/mae/Downloads/Joker-master/libs/PhTools/PhTools.pri:
-/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhCommonUI.pri:
-/home/mae/Downloads/Joker-master/libs/PhStrip/PhStrip.pri:
-/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphic.pri:
-/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.pri:
-/home/mae/Downloads/Joker-master/libs/PhSync/PhSync.pri:
-/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideo.pri:
-/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.pri:
-/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtc.pri:
-/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidi.pri:
-/home/mae/Downloads/Joker-master/common/deploy.pri:
+/home/mae/Documents/GitHub/Joker/common/common.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTools.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhCommonUI.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStrip.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphic.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSync.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideo.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtc.pri:
+/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidi.pri:
+/home/mae/Documents/GitHub/Joker/common/deploy.pri:
 /usr/lib/qt/mkspecs/features/resolve_config.prf:
 /usr/lib/qt/mkspecs/features/default_post.prf:
 /usr/lib/qt/mkspecs/features/link_ltcg.prf:
@@ -788,7 +788,7 @@ Makefile: Joker.pro .qmake.cache /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/l
 /usr/lib/qt/mkspecs/features/yacc.prf:
 /usr/lib/qt/mkspecs/features/lex.prf:
 Joker.pro:
-/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhCommonUI.qrc:
+/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhCommonUI.qrc:
 Joker.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile Joker.pro
@@ -804,11 +804,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhCommonUI.qrc Joker.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhCommonUI.qrc Joker.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h /home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h /home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.h /home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.h /home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.h /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.h /home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h /home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h /home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h /home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h /home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h /home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h /home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.h /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.h /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcSettings.h /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.h /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h JokerWindow.h AboutDialog.h PreferencesDialog.h PropertyDialog.h PeopleDialog.h JokerSettings.h PeopleEditionDialog.h TimeBetweenTwoFeetDialog.h SecondScreenWindow.h TextDialog.h $(DISTDIR)/
-	$(COPY_FILE) --parents /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.cpp /home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.cpp /home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.cpp /home/mae/Downloads/Joker-master/libs/PhSync/PhClock.cpp /home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.cpp /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.cpp /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.cpp /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.cpp /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.cpp /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.cpp /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.cpp /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.cpp /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.cpp /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.cpp /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.cpp /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.cpp /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.cpp /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.cpp /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.cpp /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.cpp main.cpp JokerWindow.cpp AboutDialog.cpp PreferencesDialog.cpp PropertyDialog.cpp PeopleDialog.cpp PeopleEditionDialog.cpp TimeBetweenTwoFeetDialog.cpp SecondScreenWindow.cpp TextDialog.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.ui /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.ui /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.ui JokerWindow.ui AboutDialog.ui PreferencesDialog.ui PropertyDialog.ui PeopleDialog.ui PeopleEditionDialog.ui TimeBetweenTwoFeetDialog.ui TextDialog.ui $(DISTDIR)/
+	$(COPY_FILE) --parents /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h /home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h /home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.h /home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.h /home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.h /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.h /home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h /home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h /home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h /home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h /home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h /home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h /home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.h /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.h /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcSettings.h /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.h /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h JokerWindow.h AboutDialog.h PreferencesDialog.h PropertyDialog.h PeopleDialog.h JokerSettings.h PeopleEditionDialog.h TimeBetweenTwoFeetDialog.h SecondScreenWindow.h TextDialog.h $(DISTDIR)/
+	$(COPY_FILE) --parents /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.cpp /home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.cpp /home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.cpp /home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.cpp /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.cpp /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.cpp /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.cpp /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.cpp /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.cpp /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.cpp /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.cpp /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.cpp /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.cpp /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.cpp /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.cpp /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.cpp /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.cpp main.cpp JokerWindow.cpp AboutDialog.cpp PreferencesDialog.cpp PropertyDialog.cpp PeopleDialog.cpp PeopleEditionDialog.cpp TimeBetweenTwoFeetDialog.cpp SecondScreenWindow.cpp TextDialog.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.ui /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.ui /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.ui JokerWindow.ui AboutDialog.ui PreferencesDialog.ui PropertyDialog.ui PeopleDialog.ui PeopleEditionDialog.ui TimeBetweenTwoFeetDialog.ui TextDialog.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ar_MA.ts de_DE.ts es_ES.ts fr_FR.ts it_IT.ts pt_PT.ts $(DISTDIR)/
 
 
@@ -833,573 +833,579 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_PhCommonUI.cpp qrc_Joker.cpp
+compiler_rcc_make_all: build/rcc/qrc_PhCommonUI.cpp build/rcc/qrc_Joker.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_PhCommonUI.cpp qrc_Joker.cpp
-qrc_PhCommonUI.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhCommonUI.qrc \
+	-$(DEL_FILE) build/rcc/qrc_PhCommonUI.cpp build/rcc/qrc_Joker.cpp
+build/rcc/qrc_PhCommonUI.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhCommonUI.qrc \
 		/usr/bin/rcc \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-step-forward_16_0_ffffff_none.png \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-pause_16_0_ffffff_none.png \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-play_16_0_ffffff_none.png \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-forward_16_0_ffffff_none.png \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-caret-down_16_0_ffffff_none.png \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-step-backward_16_0_ffffff_none.png \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-fast-backward_16_0_ffffff_none.png \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/fa-backward_16_0_ffffff_none.png
-	/usr/bin/rcc -name PhCommonUI /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhCommonUI.qrc -o qrc_PhCommonUI.cpp
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-step-forward_16_0_ffffff_none.png \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-pause_16_0_ffffff_none.png \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-play_16_0_ffffff_none.png \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-forward_16_0_ffffff_none.png \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-caret-down_16_0_ffffff_none.png \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-step-backward_16_0_ffffff_none.png \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-fast-backward_16_0_ffffff_none.png \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/fa-backward_16_0_ffffff_none.png
+	/usr/bin/rcc -name PhCommonUI /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhCommonUI.qrc -o build/rcc/qrc_PhCommonUI.cpp
 
-qrc_Joker.cpp: Joker.qrc \
+build/rcc/qrc_Joker.cpp: Joker.qrc \
 		/usr/bin/rcc \
-		/home/mae/Downloads/Joker-master/data/img/phonations.png
-	/usr/bin/rcc -name Joker Joker.qrc -o qrc_Joker.cpp
+		/home/mae/Documents/GitHub/Joker/data/img/phonations.png
+	/usr/bin/rcc -name Joker Joker.qrc -o build/rcc/qrc_Joker.cpp
 
-compiler_moc_predefs_make_all: moc_predefs.h
+compiler_moc_predefs_make_all: build/moc/moc_predefs.h
 compiler_moc_predefs_clean:
-	-$(DEL_FILE) moc_predefs.h
-moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -std=gnu++11 -flto -fno-fat-lto-objects -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
+	-$(DEL_FILE) build/moc/moc_predefs.h
+build/moc/moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
+	g++ -pipe -O2 -std=gnu++11 -flto -fno-fat-lto-objects -Wall -Wextra -dM -E -o build/moc/moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_PhGenericSettings.cpp moc_PhMediaPanel.cpp moc_PhTimeCodeEdit.cpp moc_PhTimeCodeDialog.cpp moc_PhFloatingMediaPanel.cpp moc_PhWindow.cpp moc_PhDocumentWindow.cpp moc_PhEditableDocumentWindow.cpp moc_PhLockableSpinBox.cpp moc_PhFeedbackDialog.cpp moc_PhDialogButtonBox.cpp moc_PhStripDoc.cpp moc_PhGraphicView.cpp moc_PhGraphicStrip.cpp moc_PhClock.cpp moc_PhSynchronizer.cpp moc_PhVideoEngine.cpp moc_PhVideoDecoder.cpp moc_PhVideoPool.cpp moc_PhAudio.cpp moc_PhAudioInput.cpp moc_PhLtcReader.cpp moc_PhLtcWriter.cpp moc_PhMidiObject.cpp moc_PhMidiInput.cpp moc_PhMidiOutput.cpp moc_PhMidiTimeCodeWriter.cpp moc_PhMidiTimeCodeReader.cpp moc_JokerWindow.cpp moc_AboutDialog.cpp moc_PreferencesDialog.cpp moc_PropertyDialog.cpp moc_PeopleDialog.cpp moc_PeopleEditionDialog.cpp moc_TimeBetweenTwoFeetDialog.cpp moc_SecondScreenWindow.cpp moc_TextDialog.cpp
+compiler_moc_header_make_all: build/moc/moc_PhGenericSettings.cpp build/moc/moc_PhMediaPanel.cpp build/moc/moc_PhTimeCodeEdit.cpp build/moc/moc_PhTimeCodeDialog.cpp build/moc/moc_PhFloatingMediaPanel.cpp build/moc/moc_PhWindow.cpp build/moc/moc_PhDocumentWindow.cpp build/moc/moc_PhEditableDocumentWindow.cpp build/moc/moc_PhLockableSpinBox.cpp build/moc/moc_PhFeedbackDialog.cpp build/moc/moc_PhDialogButtonBox.cpp build/moc/moc_PhStripDoc.cpp build/moc/moc_PhGraphicView.cpp build/moc/moc_PhGraphicStrip.cpp build/moc/moc_PhClock.cpp build/moc/moc_PhSynchronizer.cpp build/moc/moc_PhVideoEngine.cpp build/moc/moc_PhVideoDecoder.cpp build/moc/moc_PhVideoPool.cpp build/moc/moc_PhAudio.cpp build/moc/moc_PhAudioInput.cpp build/moc/moc_PhLtcReader.cpp build/moc/moc_PhLtcWriter.cpp build/moc/moc_PhMidiObject.cpp build/moc/moc_PhMidiInput.cpp build/moc/moc_PhMidiOutput.cpp build/moc/moc_PhMidiTimeCodeWriter.cpp build/moc/moc_PhMidiTimeCodeReader.cpp build/moc/moc_JokerWindow.cpp build/moc/moc_AboutDialog.cpp build/moc/moc_PreferencesDialog.cpp build/moc/moc_PropertyDialog.cpp build/moc/moc_PeopleDialog.cpp build/moc/moc_PeopleEditionDialog.cpp build/moc/moc_TimeBetweenTwoFeetDialog.cpp build/moc/moc_SecondScreenWindow.cpp build/moc/moc_TextDialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_PhGenericSettings.cpp moc_PhMediaPanel.cpp moc_PhTimeCodeEdit.cpp moc_PhTimeCodeDialog.cpp moc_PhFloatingMediaPanel.cpp moc_PhWindow.cpp moc_PhDocumentWindow.cpp moc_PhEditableDocumentWindow.cpp moc_PhLockableSpinBox.cpp moc_PhFeedbackDialog.cpp moc_PhDialogButtonBox.cpp moc_PhStripDoc.cpp moc_PhGraphicView.cpp moc_PhGraphicStrip.cpp moc_PhClock.cpp moc_PhSynchronizer.cpp moc_PhVideoEngine.cpp moc_PhVideoDecoder.cpp moc_PhVideoPool.cpp moc_PhAudio.cpp moc_PhAudioInput.cpp moc_PhLtcReader.cpp moc_PhLtcWriter.cpp moc_PhMidiObject.cpp moc_PhMidiInput.cpp moc_PhMidiOutput.cpp moc_PhMidiTimeCodeWriter.cpp moc_PhMidiTimeCodeReader.cpp moc_JokerWindow.cpp moc_AboutDialog.cpp moc_PreferencesDialog.cpp moc_PropertyDialog.cpp moc_PeopleDialog.cpp moc_PeopleEditionDialog.cpp moc_TimeBetweenTwoFeetDialog.cpp moc_SecondScreenWindow.cpp moc_TextDialog.cpp
-moc_PhGenericSettings.cpp: /home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		moc_predefs.h \
+	-$(DEL_FILE) build/moc/moc_PhGenericSettings.cpp build/moc/moc_PhMediaPanel.cpp build/moc/moc_PhTimeCodeEdit.cpp build/moc/moc_PhTimeCodeDialog.cpp build/moc/moc_PhFloatingMediaPanel.cpp build/moc/moc_PhWindow.cpp build/moc/moc_PhDocumentWindow.cpp build/moc/moc_PhEditableDocumentWindow.cpp build/moc/moc_PhLockableSpinBox.cpp build/moc/moc_PhFeedbackDialog.cpp build/moc/moc_PhDialogButtonBox.cpp build/moc/moc_PhStripDoc.cpp build/moc/moc_PhGraphicView.cpp build/moc/moc_PhGraphicStrip.cpp build/moc/moc_PhClock.cpp build/moc/moc_PhSynchronizer.cpp build/moc/moc_PhVideoEngine.cpp build/moc/moc_PhVideoDecoder.cpp build/moc/moc_PhVideoPool.cpp build/moc/moc_PhAudio.cpp build/moc/moc_PhAudioInput.cpp build/moc/moc_PhLtcReader.cpp build/moc/moc_PhLtcWriter.cpp build/moc/moc_PhMidiObject.cpp build/moc/moc_PhMidiInput.cpp build/moc/moc_PhMidiOutput.cpp build/moc/moc_PhMidiTimeCodeWriter.cpp build/moc/moc_PhMidiTimeCodeReader.cpp build/moc/moc_JokerWindow.cpp build/moc/moc_AboutDialog.cpp build/moc/moc_PreferencesDialog.cpp build/moc/moc_PropertyDialog.cpp build/moc/moc_PeopleDialog.cpp build/moc/moc_PeopleEditionDialog.cpp build/moc/moc_TimeBetweenTwoFeetDialog.cpp build/moc/moc_SecondScreenWindow.cpp build/moc/moc_TextDialog.cpp
+build/moc/moc_PhGenericSettings.cpp: /home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h -o moc_PhGenericSettings.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h -o build/moc/moc_PhGenericSettings.cpp
 
-moc_PhMediaPanel.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_PhMediaPanel.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h -o moc_PhMediaPanel.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h -o build/moc/moc_PhMediaPanel.cpp
 
-moc_PhTimeCodeEdit.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		moc_predefs.h \
+build/moc/moc_PhTimeCodeEdit.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h -o moc_PhTimeCodeEdit.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.h -o build/moc/moc_PhTimeCodeEdit.cpp
 
-moc_PhTimeCodeDialog.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_PhTimeCodeDialog.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.h -o moc_PhTimeCodeDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.h -o build/moc/moc_PhTimeCodeDialog.cpp
 
-moc_PhFloatingMediaPanel.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_PhFloatingMediaPanel.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h -o moc_PhFloatingMediaPanel.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h -o build/moc/moc_PhFloatingMediaPanel.cpp
 
-moc_PhWindow.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		moc_predefs.h \
+build/moc/moc_PhWindow.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h -o moc_PhWindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h -o build/moc/moc_PhWindow.cpp
 
-moc_PhDocumentWindow.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		moc_predefs.h \
+build/moc/moc_PhDocumentWindow.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h -o moc_PhDocumentWindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h -o build/moc/moc_PhDocumentWindow.cpp
 
-moc_PhEditableDocumentWindow.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		moc_predefs.h \
+build/moc/moc_PhEditableDocumentWindow.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h -o moc_PhEditableDocumentWindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h -o build/moc/moc_PhEditableDocumentWindow.cpp
 
-moc_PhLockableSpinBox.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.h \
-		moc_predefs.h \
+build/moc/moc_PhLockableSpinBox.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.h -o moc_PhLockableSpinBox.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.h -o build/moc/moc_PhLockableSpinBox.cpp
 
-moc_PhFeedbackDialog.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		moc_predefs.h \
+build/moc/moc_PhFeedbackDialog.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.h -o moc_PhFeedbackDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.h -o build/moc/moc_PhFeedbackDialog.cpp
 
-moc_PhDialogButtonBox.cpp: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h \
-		moc_predefs.h \
+build/moc/moc_PhDialogButtonBox.cpp: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h -o moc_PhDialogButtonBox.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h -o build/moc/moc_PhDialogButtonBox.cpp
 
-moc_PhStripDoc.cpp: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		moc_predefs.h \
+build/moc/moc_PhStripDoc.cpp: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h -o moc_PhStripDoc.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h -o build/moc/moc_PhStripDoc.cpp
 
-moc_PhGraphicView.cpp: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		moc_predefs.h \
+build/moc/moc_PhGraphicView.cpp: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h -o moc_PhGraphicView.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h -o build/moc/moc_PhGraphicView.cpp
 
-moc_PhGraphicStrip.cpp: /home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		moc_predefs.h \
+build/moc/moc_PhGraphicStrip.cpp: /home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h -o moc_PhGraphicStrip.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h -o build/moc/moc_PhGraphicStrip.cpp
 
-moc_PhClock.cpp: /home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_PhClock.cpp: /home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h -o moc_PhClock.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h -o build/moc/moc_PhClock.cpp
 
-moc_PhSynchronizer.cpp: /home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		moc_predefs.h \
+build/moc/moc_PhSynchronizer.cpp: /home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h -o moc_PhSynchronizer.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h -o build/moc/moc_PhSynchronizer.cpp
 
-moc_PhVideoEngine.cpp: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		moc_predefs.h \
+build/moc/moc_PhVideoEngine.cpp: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h -o moc_PhVideoEngine.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h -o build/moc/moc_PhVideoEngine.cpp
 
-moc_PhVideoDecoder.cpp: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		moc_predefs.h \
+build/moc/moc_PhVideoDecoder.cpp: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.h -o moc_PhVideoDecoder.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.h -o build/moc/moc_PhVideoDecoder.cpp
 
-moc_PhVideoPool.cpp: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		moc_predefs.h \
+build/moc/moc_PhVideoPool.cpp: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h -o moc_PhVideoPool.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h -o build/moc/moc_PhVideoPool.cpp
 
-moc_PhAudio.cpp: /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		moc_predefs.h \
+build/moc/moc_PhAudio.cpp: /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h -o moc_PhAudio.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h -o build/moc/moc_PhAudio.cpp
 
-moc_PhAudioInput.cpp: /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		moc_predefs.h \
+build/moc/moc_PhAudioInput.cpp: /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h -o moc_PhAudioInput.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h -o build/moc/moc_PhAudioInput.cpp
 
-moc_PhLtcReader.cpp: /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		moc_predefs.h \
+build/moc/moc_PhLtcReader.cpp: /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h -o moc_PhLtcReader.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h -o build/moc/moc_PhLtcReader.cpp
 
-moc_PhLtcWriter.cpp: /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		moc_predefs.h \
+build/moc/moc_PhLtcWriter.cpp: /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.h -o moc_PhLtcWriter.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.h -o build/moc/moc_PhLtcWriter.cpp
 
-moc_PhMidiObject.cpp: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_PhMidiObject.cpp: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h -o moc_PhMidiObject.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h -o build/moc/moc_PhMidiObject.cpp
 
-moc_PhMidiInput.cpp: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_PhMidiInput.cpp: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h -o moc_PhMidiInput.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h -o build/moc/moc_PhMidiInput.cpp
 
-moc_PhMidiOutput.cpp: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_PhMidiOutput.cpp: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h -o moc_PhMidiOutput.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h -o build/moc/moc_PhMidiOutput.cpp
 
-moc_PhMidiTimeCodeWriter.cpp: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		moc_predefs.h \
+build/moc/moc_PhMidiTimeCodeWriter.cpp: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h -o moc_PhMidiTimeCodeWriter.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h -o build/moc/moc_PhMidiTimeCodeWriter.cpp
 
-moc_PhMidiTimeCodeReader.cpp: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		moc_predefs.h \
+build/moc/moc_PhMidiTimeCodeReader.cpp: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h -o moc_PhMidiTimeCodeReader.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h -o build/moc/moc_PhMidiTimeCodeReader.cpp
 
-moc_JokerWindow.cpp: JokerWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
+build/moc/moc_JokerWindow.cpp: JokerWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
 		SecondScreenWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySlaveController.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonyController.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySlaveController.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonyController.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
 		PropertyDialog.h \
 		TimeBetweenTwoFeetDialog.h \
-		moc_predefs.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include JokerWindow.h -o moc_JokerWindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include JokerWindow.h -o build/moc/moc_JokerWindow.cpp
 
-moc_AboutDialog.cpp: AboutDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		moc_predefs.h \
+build/moc/moc_AboutDialog.cpp: AboutDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include AboutDialog.h -o moc_AboutDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include AboutDialog.h -o build/moc/moc_AboutDialog.cpp
 
-moc_PreferencesDialog.cpp: PreferencesDialog.h \
+build/moc/moc_PreferencesDialog.cpp: PreferencesDialog.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		moc_predefs.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PreferencesDialog.h -o moc_PreferencesDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PreferencesDialog.h -o build/moc/moc_PreferencesDialog.cpp
 
-moc_PropertyDialog.cpp: PropertyDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		moc_predefs.h \
+build/moc/moc_PropertyDialog.cpp: PropertyDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PropertyDialog.h -o moc_PropertyDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PropertyDialog.h -o build/moc/moc_PropertyDialog.cpp
 
-moc_PeopleDialog.cpp: PeopleDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
+build/moc/moc_PeopleDialog.cpp: PeopleDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		moc_predefs.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PeopleDialog.h -o moc_PeopleDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PeopleDialog.h -o build/moc/moc_PeopleDialog.cpp
 
-moc_PeopleEditionDialog.cpp: PeopleEditionDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		moc_predefs.h \
+build/moc/moc_PeopleEditionDialog.cpp: PeopleEditionDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PeopleEditionDialog.h -o moc_PeopleEditionDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include PeopleEditionDialog.h -o build/moc/moc_PeopleEditionDialog.cpp
 
-moc_TimeBetweenTwoFeetDialog.cpp: TimeBetweenTwoFeetDialog.h \
+build/moc/moc_TimeBetweenTwoFeetDialog.cpp: TimeBetweenTwoFeetDialog.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		moc_predefs.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include TimeBetweenTwoFeetDialog.h -o moc_TimeBetweenTwoFeetDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include TimeBetweenTwoFeetDialog.h -o build/moc/moc_TimeBetweenTwoFeetDialog.cpp
 
-moc_SecondScreenWindow.cpp: SecondScreenWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
+build/moc/moc_SecondScreenWindow.cpp: SecondScreenWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		moc_predefs.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include SecondScreenWindow.h -o moc_SecondScreenWindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include SecondScreenWindow.h -o build/moc/moc_SecondScreenWindow.cpp
 
-moc_TextDialog.cpp: TextDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		moc_predefs.h \
+build/moc/moc_TextDialog.cpp: TextDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		build/moc/moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/mae/Downloads/Joker-master/app/Joker/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Downloads/Joker-master/app/Joker -I/home/mae/Downloads/Joker-master/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/include/ffmpeg4.4 -I/home/mae/Downloads/Joker-master/vendor/rtmidi -I/usr/include/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include TextDialog.h -o moc_TextDialog.cpp
+	/usr/bin/moc $(DEFINES) --include /home/mae/Documents/GitHub/Joker/app/Joker/build/moc/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/mae/Documents/GitHub/Joker/app/Joker -I/home/mae/Documents/GitHub/Joker/libs -I/usr/local/include -I/usr/include/GL -I/usr/include -I/usr/local/include -I/home/mae/Documents/GitHub/Joker/vendor/rtmidi -I/usr/include/qt -I/usr/include/qt/QtOpenGL -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtNetwork -I/usr/include/qt/QtXml -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/15.2.1 -I/usr/include/c++/15.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/15.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include-fixed -I/usr/include TextDialog.h -o build/moc/moc_TextDialog.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_PhMediaPanel.h ui_PhTimeCodeDialog.h ui_PhFeedbackDialog.h ui_JokerWindow.h ui_AboutDialog.h ui_PreferencesDialog.h ui_PropertyDialog.h ui_PeopleDialog.h ui_PeopleEditionDialog.h ui_TimeBetweenTwoFeetDialog.h ui_TextDialog.h
+compiler_uic_make_all: build/ui/ui_PhMediaPanel.h build/ui/ui_PhTimeCodeDialog.h build/ui/ui_PhFeedbackDialog.h build/ui/ui_JokerWindow.h build/ui/ui_AboutDialog.h build/ui/ui_PreferencesDialog.h build/ui/ui_PropertyDialog.h build/ui/ui_PeopleDialog.h build/ui/ui_PeopleEditionDialog.h build/ui/ui_TimeBetweenTwoFeetDialog.h build/ui/ui_TextDialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_PhMediaPanel.h ui_PhTimeCodeDialog.h ui_PhFeedbackDialog.h ui_JokerWindow.h ui_AboutDialog.h ui_PreferencesDialog.h ui_PropertyDialog.h ui_PeopleDialog.h ui_PeopleEditionDialog.h ui_TimeBetweenTwoFeetDialog.h ui_TextDialog.h
-ui_PhMediaPanel.h: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.ui \
+	-$(DEL_FILE) build/ui/ui_PhMediaPanel.h build/ui/ui_PhTimeCodeDialog.h build/ui/ui_PhFeedbackDialog.h build/ui/ui_JokerWindow.h build/ui/ui_AboutDialog.h build/ui/ui_PreferencesDialog.h build/ui/ui_PropertyDialog.h build/ui/ui_PeopleDialog.h build/ui/ui_PeopleEditionDialog.h build/ui/ui_TimeBetweenTwoFeetDialog.h build/ui/ui_TextDialog.h
+build/ui/ui_PhMediaPanel.h: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.ui \
 		/usr/bin/uic
-	/usr/bin/uic /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.ui -o ui_PhMediaPanel.h
+	/usr/bin/uic /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.ui -o build/ui/ui_PhMediaPanel.h
 
-ui_PhTimeCodeDialog.h: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.ui \
+build/ui/ui_PhTimeCodeDialog.h: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.ui \
 		/usr/bin/uic \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	/usr/bin/uic /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.ui -o ui_PhTimeCodeDialog.h
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	/usr/bin/uic /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.ui -o build/ui/ui_PhTimeCodeDialog.h
 
-ui_PhFeedbackDialog.h: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.ui \
+build/ui/ui_PhFeedbackDialog.h: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.ui \
 		/usr/bin/uic
-	/usr/bin/uic /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.ui -o ui_PhFeedbackDialog.h
+	/usr/bin/uic /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.ui -o build/ui/ui_PhFeedbackDialog.h
 
-ui_JokerWindow.h: JokerWindow.ui \
+build/ui/ui_JokerWindow.h: JokerWindow.ui \
 		/usr/bin/uic \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h
-	/usr/bin/uic JokerWindow.ui -o ui_JokerWindow.h
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h
+	/usr/bin/uic JokerWindow.ui -o build/ui/ui_JokerWindow.h
 
-ui_AboutDialog.h: AboutDialog.ui \
+build/ui/ui_AboutDialog.h: AboutDialog.ui \
 		/usr/bin/uic
-	/usr/bin/uic AboutDialog.ui -o ui_AboutDialog.h
+	/usr/bin/uic AboutDialog.ui -o build/ui/ui_AboutDialog.h
 
-ui_PreferencesDialog.h: PreferencesDialog.ui \
+build/ui/ui_PreferencesDialog.h: PreferencesDialog.ui \
 		/usr/bin/uic \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.h
-	/usr/bin/uic PreferencesDialog.ui -o ui_PreferencesDialog.h
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.h
+	/usr/bin/uic PreferencesDialog.ui -o build/ui/ui_PreferencesDialog.h
 
-ui_PropertyDialog.h: PropertyDialog.ui \
+build/ui/ui_PropertyDialog.h: PropertyDialog.ui \
 		/usr/bin/uic
-	/usr/bin/uic PropertyDialog.ui -o ui_PropertyDialog.h
+	/usr/bin/uic PropertyDialog.ui -o build/ui/ui_PropertyDialog.h
 
-ui_PeopleDialog.h: PeopleDialog.ui \
+build/ui/ui_PeopleDialog.h: PeopleDialog.ui \
 		/usr/bin/uic \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h
-	/usr/bin/uic PeopleDialog.ui -o ui_PeopleDialog.h
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h
+	/usr/bin/uic PeopleDialog.ui -o build/ui/ui_PeopleDialog.h
 
-ui_PeopleEditionDialog.h: PeopleEditionDialog.ui \
+build/ui/ui_PeopleEditionDialog.h: PeopleEditionDialog.ui \
 		/usr/bin/uic \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h
-	/usr/bin/uic PeopleEditionDialog.ui -o ui_PeopleEditionDialog.h
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h
+	/usr/bin/uic PeopleEditionDialog.ui -o build/ui/ui_PeopleEditionDialog.h
 
-ui_TimeBetweenTwoFeetDialog.h: TimeBetweenTwoFeetDialog.ui \
+build/ui/ui_TimeBetweenTwoFeetDialog.h: TimeBetweenTwoFeetDialog.ui \
 		/usr/bin/uic \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h
-	/usr/bin/uic TimeBetweenTwoFeetDialog.ui -o ui_TimeBetweenTwoFeetDialog.h
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h
+	/usr/bin/uic TimeBetweenTwoFeetDialog.ui -o build/ui/ui_TimeBetweenTwoFeetDialog.h
 
-ui_TextDialog.h: TextDialog.ui \
+build/ui/ui_TextDialog.h: TextDialog.ui \
 		/usr/bin/uic \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	/usr/bin/uic TextDialog.ui -o ui_TextDialog.h
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	/usr/bin/uic TextDialog.ui -o build/ui/ui_TextDialog.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -1411,806 +1417,807 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-PhDebug.o: /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhDebug.o /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.cpp
+build/obj/PhDebug.o: /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhDebug.o /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.cpp
 
-PhTickCounter.o: /home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhTickCounter.o /home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.cpp
+build/obj/PhTickCounter.o: /home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhTickCounter.o /home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.cpp
 
-PhPictureTools.o: /home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhPictureTools.o /home/mae/Downloads/Joker-master/libs/PhTools/PhPictureTools.cpp
+build/obj/PhPictureTools.o: /home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhPictureTools.o /home/mae/Documents/GitHub/Joker/libs/PhTools/PhPictureTools.cpp
 
-PhFileTool.o: /home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhFileTool.o /home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.cpp
+build/obj/PhFileTool.o: /home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhFileTool.o /home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.cpp
 
-PhGenericSettings.o: /home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGenericSettings.o /home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.cpp
+build/obj/PhGenericSettings.o: /home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGenericSettings.o /home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.cpp
 
-PhMediaPanel.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		ui_PhMediaPanel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhMediaPanel.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.cpp
+build/obj/PhMediaPanel.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/ui/ui_PhMediaPanel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhMediaPanel.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.cpp
 
-PhTimeCodeEdit.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhTimeCodeEdit.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.cpp
+build/obj/PhTimeCodeEdit.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhTimeCodeEdit.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeEdit.cpp
 
-PhTimeCodeDialog.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		ui_PhTimeCodeDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeEdit.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhTimeCodeDialog.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.cpp
+build/obj/PhTimeCodeDialog.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/ui/ui_PhTimeCodeDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhTimeCodeDialog.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.cpp
 
-PhFloatingMediaPanel.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhFloatingMediaPanel.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.cpp
+build/obj/PhFloatingMediaPanel.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhFloatingMediaPanel.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.cpp
 
-PhWindow.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhWindow.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.cpp
+build/obj/PhWindow.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhWindow.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.cpp
 
-PhDocumentWindow.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhSandbox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhDocumentWindow.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.cpp
+build/obj/PhDocumentWindow.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhSandbox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhDocumentWindow.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.cpp
 
-PhEditableDocumentWindow.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhEditableDocumentWindow.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.cpp
+build/obj/PhEditableDocumentWindow.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhEditableDocumentWindow.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.cpp
 
-PhLockableSpinBox.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhLockableSpinBox.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.cpp
+build/obj/PhLockableSpinBox.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhLockableSpinBox.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhLockableSpinBox.cpp
 
-PhFeedbackDialog.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		ui_PhFeedbackDialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhFeedbackDialog.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.cpp
+build/obj/PhFeedbackDialog.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		build/ui/ui_PhFeedbackDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhFeedbackDialog.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.cpp
 
-PhDialogButtonBox.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhDialogButtonBox.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.cpp
+build/obj/PhDialogButtonBox.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhDialogButtonBox.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDialogButtonBox.cpp
 
-PhHelpMenu.o: /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.cpp /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhHelpMenu.o /home/mae/Downloads/Joker-master/libs/PhCommonUI/PhHelpMenu.cpp
+build/obj/PhHelpMenu.o: /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.cpp /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhHelpMenu.o /home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhHelpMenu.cpp
 
-PhStripDoc.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhFileTool.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripDoc.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.cpp
+build/obj/PhStripDoc.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhFileTool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripDoc.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.cpp
 
-PhStripObject.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripObject.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.cpp
+build/obj/PhStripObject.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripObject.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.cpp
 
-PhStripCut.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripCut.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.cpp
+build/obj/PhStripCut.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripCut.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.cpp
 
-PhStripText.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripText.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.cpp
+build/obj/PhStripText.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripText.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.cpp
 
-PhStripLoop.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripLoop.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.cpp
+build/obj/PhStripLoop.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripLoop.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.cpp
 
-PhPeople.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhPeople.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.cpp
+build/obj/PhPeople.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhPeople.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.cpp
 
-PhStripPeopleObject.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripPeopleObject.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.cpp
+build/obj/PhStripPeopleObject.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripPeopleObject.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.cpp
 
-PhStripDetect.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripDetect.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.cpp
+build/obj/PhStripDetect.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripDetect.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.cpp
 
-PhStripSentence.o: /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhStripSentence.o /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.cpp
+build/obj/PhStripSentence.o: /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhStripSentence.o /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.cpp
 
-PhGraphicView.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicView.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.cpp
+build/obj/PhGraphicView.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicView.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.cpp
 
-PhGraphicImage.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicImage.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.cpp
+build/obj/PhGraphicImage.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicImage.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.cpp
 
-PhGraphicText.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicText.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.cpp
+build/obj/PhGraphicText.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicText.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.cpp
 
-PhGraphicTexturedRect.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicTexturedRect.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.cpp
+build/obj/PhGraphicTexturedRect.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicTexturedRect.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.cpp
 
-PhFont.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhFont.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.cpp
+build/obj/PhFont.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhFont.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.cpp
 
-PhGraphicObject.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicObject.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.cpp
+build/obj/PhGraphicObject.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicObject.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.cpp
 
-PhGraphicRect.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicRect.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.cpp
+build/obj/PhGraphicRect.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicRect.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.cpp
 
-PhGraphicSolidRect.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicSolidRect.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.cpp
+build/obj/PhGraphicSolidRect.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicSolidRect.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.cpp
 
-PhGraphicLoop.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicLoop.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.cpp
+build/obj/PhGraphicLoop.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicLoop.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.cpp
 
-PhGraphicDisc.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicDisc.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.cpp
+build/obj/PhGraphicDisc.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicDisc.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.cpp
 
-PhGraphicDashedLine.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicDashedLine.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.cpp
+build/obj/PhGraphicDashedLine.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicDashedLine.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.cpp
 
-PhGraphicArrow.o: /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.cpp /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicArrow.o /home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.cpp
+build/obj/PhGraphicArrow.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.cpp /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicArrow.o /home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.cpp
 
-PhGraphicStrip.o: /home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDisc.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicDashedLine.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicArrow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicLoop.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhGraphicStrip.o /home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.cpp
+build/obj/PhGraphicStrip.o: /home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDisc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicDashedLine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicArrow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicLoop.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhGraphicStrip.o /home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.cpp
 
-PhTimeCode.o: /home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.cpp /home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhTimeCode.o /home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.cpp
+build/obj/PhTimeCode.o: /home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.cpp /home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhTimeCode.o /home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.cpp
 
-PhClock.o: /home/mae/Downloads/Joker-master/libs/PhSync/PhClock.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhClock.o /home/mae/Downloads/Joker-master/libs/PhSync/PhClock.cpp
+build/obj/PhClock.o: /home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhClock.o /home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.cpp
 
-PhSynchronizer.o: /home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhSynchronizer.o /home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.cpp
+build/obj/PhSynchronizer.o: /home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhSynchronizer.o /home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.cpp
 
-PhVideoEngine.o: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhVideoEngine.o /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.cpp
+build/obj/PhVideoEngine.o: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhVideoEngine.o /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.cpp
 
-PhVideoDecoder.o: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhVideoDecoder.o /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoDecoder.cpp
+build/obj/PhVideoDecoder.o: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhVideoDecoder.o /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoDecoder.cpp
 
-PhVideoBuffer.o: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.cpp /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhVideoBuffer.o /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.cpp
+build/obj/PhVideoBuffer.o: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.cpp /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhVideoBuffer.o /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.cpp
 
-PhVideoPool.o: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhVideoPool.o /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.cpp
+build/obj/PhVideoPool.o: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhVideoPool.o /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.cpp
 
-PhVideoRect.o: /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.cpp /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhVideoRect.o /home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.cpp
+build/obj/PhVideoRect.o: /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.cpp /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhVideoRect.o /home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.cpp
 
-PhAudio.o: /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhAudio.o /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.cpp
+build/obj/PhAudio.o: /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhAudio.o /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.cpp
 
-PhAudioOutput.o: /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhAudioOutput.o /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.cpp
+build/obj/PhAudioOutput.o: /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhAudioOutput.o /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.cpp
 
-PhAudioInput.o: /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhAudioInput.o /home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.cpp
+build/obj/PhAudioInput.o: /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhAudioInput.o /home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.cpp
 
-PhLtcReader.o: /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhLtcReader.o /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.cpp
+build/obj/PhLtcReader.o: /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhLtcReader.o /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.cpp
 
-PhLtcWriter.o: /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhLtcWriter.o /home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcWriter.cpp
+build/obj/PhLtcWriter.o: /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhLtcWriter.o /home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcWriter.cpp
 
-PhMidiObject.o: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.cpp /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhMidiObject.o /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.cpp
+build/obj/PhMidiObject.o: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.cpp /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhMidiObject.o /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.cpp
 
-PhMidiInput.o: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhMidiInput.o /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.cpp
+build/obj/PhMidiInput.o: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhMidiInput.o /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.cpp
 
-PhMidiOutput.o: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhMidiOutput.o /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.cpp
+build/obj/PhMidiOutput.o: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhMidiOutput.o /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.cpp
 
-PhMidiTimeCodeWriter.o: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.cpp /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhMidiTimeCodeWriter.o /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.cpp
+build/obj/PhMidiTimeCodeWriter.o: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.cpp /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhMidiTimeCodeWriter.o /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.cpp
 
-PhMidiTimeCodeReader.o: /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PhMidiTimeCodeReader.o /home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.cpp
+build/obj/PhMidiTimeCodeReader.o: /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PhMidiTimeCodeReader.o /home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.cpp
 
-main.o: main.cpp /home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
+build/obj/main.o: main.cpp /home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
 		JokerWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
 		SecondScreenWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySlaveController.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonyController.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySlaveController.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonyController.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
 		PropertyDialog.h \
 		TimeBetweenTwoFeetDialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/main.o main.cpp
 
-JokerWindow.o: JokerWindow.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhTimeCodeDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicText.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.h \
+build/obj/JokerWindow.o: JokerWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhTimeCodeDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.h \
 		JokerWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFloatingMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhMediaPanel.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhEditableDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFloatingMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhMediaPanel.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhEditableDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindow.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
 		SecondScreenWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStrip.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicImage.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySlaveController.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonyController.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiTimeCodeWriter.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStrip.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicImage.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySlaveController.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonyController.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiTimeCodeWriter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
 		PropertyDialog.h \
 		TimeBetweenTwoFeetDialog.h \
-		ui_JokerWindow.h \
+		build/ui/ui_JokerWindow.h \
 		AboutDialog.h \
 		PreferencesDialog.h \
 		PeopleDialog.h \
 		TextDialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o JokerWindow.o JokerWindow.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/JokerWindow.o JokerWindow.cpp
 
-AboutDialog.o: AboutDialog.cpp AboutDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		ui_AboutDialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AboutDialog.o AboutDialog.cpp
+build/obj/AboutDialog.o: AboutDialog.cpp AboutDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		build/ui/ui_AboutDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/AboutDialog.o AboutDialog.cpp
 
-PreferencesDialog.o: PreferencesDialog.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSynchronizer.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReader.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudioInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhAudio/PhAudio.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiInput.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhMidi/PhMidiOutput.h \
-		ui_PreferencesDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhLockableSpinBox.h \
+build/obj/PreferencesDialog.o: PreferencesDialog.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSynchronizer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReader.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudioInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhAudio/PhAudio.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiInput.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiObject.h \
+		/home/mae/Documents/GitHub/Joker/vendor/rtmidi/RtMidi.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhMidi/PhMidiOutput.h \
+		build/ui/ui_PreferencesDialog.h \
 		PreferencesDialog.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PreferencesDialog.o PreferencesDialog.cpp
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PreferencesDialog.o PreferencesDialog.cpp
 
-PropertyDialog.o: PropertyDialog.cpp PropertyDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
-		ui_PropertyDialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PropertyDialog.o PropertyDialog.cpp
+build/obj/PropertyDialog.o: PropertyDialog.cpp PropertyDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
+		build/ui/ui_PropertyDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PropertyDialog.o PropertyDialog.cpp
 
-PeopleDialog.o: PeopleDialog.cpp PeopleDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
+build/obj/PeopleDialog.o: PeopleDialog.cpp PeopleDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		ui_PeopleDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		build/ui/ui_PeopleDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
 		PeopleEditionDialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PeopleDialog.o PeopleDialog.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PeopleDialog.o PeopleDialog.cpp
 
-PeopleEditionDialog.o: PeopleEditionDialog.cpp PeopleEditionDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		ui_PeopleEditionDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PeopleEditionDialog.o PeopleEditionDialog.cpp
+build/obj/PeopleEditionDialog.o: PeopleEditionDialog.cpp PeopleEditionDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		build/ui/ui_PeopleEditionDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/PeopleEditionDialog.o PeopleEditionDialog.cpp
 
-TimeBetweenTwoFeetDialog.o: TimeBetweenTwoFeetDialog.cpp TimeBetweenTwoFeetDialog.h \
+build/obj/TimeBetweenTwoFeetDialog.o: TimeBetweenTwoFeetDialog.cpp TimeBetweenTwoFeetDialog.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h \
-		ui_TimeBetweenTwoFeetDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDialogButtonBox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TimeBetweenTwoFeetDialog.o TimeBetweenTwoFeetDialog.cpp
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h \
+		build/ui/ui_TimeBetweenTwoFeetDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/TimeBetweenTwoFeetDialog.o TimeBetweenTwoFeetDialog.cpp
 
-SecondScreenWindow.o: SecondScreenWindow.cpp /home/mae/Downloads/Joker-master/libs/PhTools/PhDebug.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSolidRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicObject.h \
+build/obj/SecondScreenWindow.o: SecondScreenWindow.cpp /home/mae/Documents/GitHub/Joker/libs/PhTools/PhDebug.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSolidRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicObject.h \
 		SecondScreenWindow.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicView.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhTickCounter.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhFont.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoEngine.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoBuffer.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoPool.h \
-		/home/mae/Downloads/Joker-master/libs/PhVideo/PhVideoRect.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphic/PhGraphicTexturedRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicView.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhTickCounter.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhFont.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoEngine.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoBuffer.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoPool.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhVideo/PhVideoRect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphic/PhGraphicTexturedRect.h \
 		JokerSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhTools/PhGenericSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhSyncSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhGraphicStrip/PhGraphicStripSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhDocumentWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhWindowSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhCommonUI/PhFeedbackSettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhSony/PhSonySettings.h \
-		/home/mae/Downloads/Joker-master/libs/PhLtc/PhLtcReaderSettings.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SecondScreenWindow.o SecondScreenWindow.cpp
+		/home/mae/Documents/GitHub/Joker/libs/PhTools/PhGenericSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhSyncSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhGraphicStrip/PhGraphicStripSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhDocumentWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhWindowSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhCommonUI/PhFeedbackSettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSony/PhSonySettings.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhLtc/PhLtcReaderSettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/SecondScreenWindow.o SecondScreenWindow.cpp
 
-TextDialog.o: TextDialog.cpp TextDialog.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDoc.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTimeCode.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhTime.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhPeople.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripCut.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhSync/PhClock.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripLoop.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripText.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripPeopleObject.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripDetect.h \
-		/home/mae/Downloads/Joker-master/libs/PhStrip/PhStripSentence.h \
-		ui_TextDialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TextDialog.o TextDialog.cpp
+build/obj/TextDialog.o: TextDialog.cpp TextDialog.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDoc.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTimeCode.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhTime.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhPeople.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripCut.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhSync/PhClock.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripLoop.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripText.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripPeopleObject.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripDetect.h \
+		/home/mae/Documents/GitHub/Joker/libs/PhStrip/PhStripSentence.h \
+		build/ui/ui_TextDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/TextDialog.o TextDialog.cpp
 
-qrc_PhCommonUI.o: qrc_PhCommonUI.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_PhCommonUI.o qrc_PhCommonUI.cpp
+build/obj/qrc_PhCommonUI.o: build/rcc/qrc_PhCommonUI.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/qrc_PhCommonUI.o build/rcc/qrc_PhCommonUI.cpp
 
-qrc_Joker.o: qrc_Joker.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_Joker.o qrc_Joker.cpp
+build/obj/qrc_Joker.o: build/rcc/qrc_Joker.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/qrc_Joker.o build/rcc/qrc_Joker.cpp
 
-moc_PhGenericSettings.o: moc_PhGenericSettings.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhGenericSettings.o moc_PhGenericSettings.cpp
+build/obj/moc_PhGenericSettings.o: build/moc/moc_PhGenericSettings.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhGenericSettings.o build/moc/moc_PhGenericSettings.cpp
 
-moc_PhMediaPanel.o: moc_PhMediaPanel.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhMediaPanel.o moc_PhMediaPanel.cpp
+build/obj/moc_PhMediaPanel.o: build/moc/moc_PhMediaPanel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhMediaPanel.o build/moc/moc_PhMediaPanel.cpp
 
-moc_PhTimeCodeEdit.o: moc_PhTimeCodeEdit.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhTimeCodeEdit.o moc_PhTimeCodeEdit.cpp
+build/obj/moc_PhTimeCodeEdit.o: build/moc/moc_PhTimeCodeEdit.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhTimeCodeEdit.o build/moc/moc_PhTimeCodeEdit.cpp
 
-moc_PhTimeCodeDialog.o: moc_PhTimeCodeDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhTimeCodeDialog.o moc_PhTimeCodeDialog.cpp
+build/obj/moc_PhTimeCodeDialog.o: build/moc/moc_PhTimeCodeDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhTimeCodeDialog.o build/moc/moc_PhTimeCodeDialog.cpp
 
-moc_PhFloatingMediaPanel.o: moc_PhFloatingMediaPanel.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhFloatingMediaPanel.o moc_PhFloatingMediaPanel.cpp
+build/obj/moc_PhFloatingMediaPanel.o: build/moc/moc_PhFloatingMediaPanel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhFloatingMediaPanel.o build/moc/moc_PhFloatingMediaPanel.cpp
 
-moc_PhWindow.o: moc_PhWindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhWindow.o moc_PhWindow.cpp
+build/obj/moc_PhWindow.o: build/moc/moc_PhWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhWindow.o build/moc/moc_PhWindow.cpp
 
-moc_PhDocumentWindow.o: moc_PhDocumentWindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhDocumentWindow.o moc_PhDocumentWindow.cpp
+build/obj/moc_PhDocumentWindow.o: build/moc/moc_PhDocumentWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhDocumentWindow.o build/moc/moc_PhDocumentWindow.cpp
 
-moc_PhEditableDocumentWindow.o: moc_PhEditableDocumentWindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhEditableDocumentWindow.o moc_PhEditableDocumentWindow.cpp
+build/obj/moc_PhEditableDocumentWindow.o: build/moc/moc_PhEditableDocumentWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhEditableDocumentWindow.o build/moc/moc_PhEditableDocumentWindow.cpp
 
-moc_PhLockableSpinBox.o: moc_PhLockableSpinBox.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhLockableSpinBox.o moc_PhLockableSpinBox.cpp
+build/obj/moc_PhLockableSpinBox.o: build/moc/moc_PhLockableSpinBox.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhLockableSpinBox.o build/moc/moc_PhLockableSpinBox.cpp
 
-moc_PhFeedbackDialog.o: moc_PhFeedbackDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhFeedbackDialog.o moc_PhFeedbackDialog.cpp
+build/obj/moc_PhFeedbackDialog.o: build/moc/moc_PhFeedbackDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhFeedbackDialog.o build/moc/moc_PhFeedbackDialog.cpp
 
-moc_PhDialogButtonBox.o: moc_PhDialogButtonBox.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhDialogButtonBox.o moc_PhDialogButtonBox.cpp
+build/obj/moc_PhDialogButtonBox.o: build/moc/moc_PhDialogButtonBox.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhDialogButtonBox.o build/moc/moc_PhDialogButtonBox.cpp
 
-moc_PhStripDoc.o: moc_PhStripDoc.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhStripDoc.o moc_PhStripDoc.cpp
+build/obj/moc_PhStripDoc.o: build/moc/moc_PhStripDoc.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhStripDoc.o build/moc/moc_PhStripDoc.cpp
 
-moc_PhGraphicView.o: moc_PhGraphicView.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhGraphicView.o moc_PhGraphicView.cpp
+build/obj/moc_PhGraphicView.o: build/moc/moc_PhGraphicView.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhGraphicView.o build/moc/moc_PhGraphicView.cpp
 
-moc_PhGraphicStrip.o: moc_PhGraphicStrip.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhGraphicStrip.o moc_PhGraphicStrip.cpp
+build/obj/moc_PhGraphicStrip.o: build/moc/moc_PhGraphicStrip.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhGraphicStrip.o build/moc/moc_PhGraphicStrip.cpp
 
-moc_PhClock.o: moc_PhClock.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhClock.o moc_PhClock.cpp
+build/obj/moc_PhClock.o: build/moc/moc_PhClock.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhClock.o build/moc/moc_PhClock.cpp
 
-moc_PhSynchronizer.o: moc_PhSynchronizer.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhSynchronizer.o moc_PhSynchronizer.cpp
+build/obj/moc_PhSynchronizer.o: build/moc/moc_PhSynchronizer.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhSynchronizer.o build/moc/moc_PhSynchronizer.cpp
 
-moc_PhVideoEngine.o: moc_PhVideoEngine.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhVideoEngine.o moc_PhVideoEngine.cpp
+build/obj/moc_PhVideoEngine.o: build/moc/moc_PhVideoEngine.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhVideoEngine.o build/moc/moc_PhVideoEngine.cpp
 
-moc_PhVideoDecoder.o: moc_PhVideoDecoder.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhVideoDecoder.o moc_PhVideoDecoder.cpp
+build/obj/moc_PhVideoDecoder.o: build/moc/moc_PhVideoDecoder.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhVideoDecoder.o build/moc/moc_PhVideoDecoder.cpp
 
-moc_PhVideoPool.o: moc_PhVideoPool.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhVideoPool.o moc_PhVideoPool.cpp
+build/obj/moc_PhVideoPool.o: build/moc/moc_PhVideoPool.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhVideoPool.o build/moc/moc_PhVideoPool.cpp
 
-moc_PhAudio.o: moc_PhAudio.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhAudio.o moc_PhAudio.cpp
+build/obj/moc_PhAudio.o: build/moc/moc_PhAudio.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhAudio.o build/moc/moc_PhAudio.cpp
 
-moc_PhAudioInput.o: moc_PhAudioInput.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhAudioInput.o moc_PhAudioInput.cpp
+build/obj/moc_PhAudioInput.o: build/moc/moc_PhAudioInput.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhAudioInput.o build/moc/moc_PhAudioInput.cpp
 
-moc_PhLtcReader.o: moc_PhLtcReader.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhLtcReader.o moc_PhLtcReader.cpp
+build/obj/moc_PhLtcReader.o: build/moc/moc_PhLtcReader.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhLtcReader.o build/moc/moc_PhLtcReader.cpp
 
-moc_PhLtcWriter.o: moc_PhLtcWriter.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhLtcWriter.o moc_PhLtcWriter.cpp
+build/obj/moc_PhLtcWriter.o: build/moc/moc_PhLtcWriter.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhLtcWriter.o build/moc/moc_PhLtcWriter.cpp
 
-moc_PhMidiObject.o: moc_PhMidiObject.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhMidiObject.o moc_PhMidiObject.cpp
+build/obj/moc_PhMidiObject.o: build/moc/moc_PhMidiObject.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhMidiObject.o build/moc/moc_PhMidiObject.cpp
 
-moc_PhMidiInput.o: moc_PhMidiInput.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhMidiInput.o moc_PhMidiInput.cpp
+build/obj/moc_PhMidiInput.o: build/moc/moc_PhMidiInput.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhMidiInput.o build/moc/moc_PhMidiInput.cpp
 
-moc_PhMidiOutput.o: moc_PhMidiOutput.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhMidiOutput.o moc_PhMidiOutput.cpp
+build/obj/moc_PhMidiOutput.o: build/moc/moc_PhMidiOutput.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhMidiOutput.o build/moc/moc_PhMidiOutput.cpp
 
-moc_PhMidiTimeCodeWriter.o: moc_PhMidiTimeCodeWriter.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhMidiTimeCodeWriter.o moc_PhMidiTimeCodeWriter.cpp
+build/obj/moc_PhMidiTimeCodeWriter.o: build/moc/moc_PhMidiTimeCodeWriter.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhMidiTimeCodeWriter.o build/moc/moc_PhMidiTimeCodeWriter.cpp
 
-moc_PhMidiTimeCodeReader.o: moc_PhMidiTimeCodeReader.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PhMidiTimeCodeReader.o moc_PhMidiTimeCodeReader.cpp
+build/obj/moc_PhMidiTimeCodeReader.o: build/moc/moc_PhMidiTimeCodeReader.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PhMidiTimeCodeReader.o build/moc/moc_PhMidiTimeCodeReader.cpp
 
-moc_JokerWindow.o: moc_JokerWindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_JokerWindow.o moc_JokerWindow.cpp
+build/obj/moc_JokerWindow.o: build/moc/moc_JokerWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_JokerWindow.o build/moc/moc_JokerWindow.cpp
 
-moc_AboutDialog.o: moc_AboutDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_AboutDialog.o moc_AboutDialog.cpp
+build/obj/moc_AboutDialog.o: build/moc/moc_AboutDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_AboutDialog.o build/moc/moc_AboutDialog.cpp
 
-moc_PreferencesDialog.o: moc_PreferencesDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PreferencesDialog.o moc_PreferencesDialog.cpp
+build/obj/moc_PreferencesDialog.o: build/moc/moc_PreferencesDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PreferencesDialog.o build/moc/moc_PreferencesDialog.cpp
 
-moc_PropertyDialog.o: moc_PropertyDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PropertyDialog.o moc_PropertyDialog.cpp
+build/obj/moc_PropertyDialog.o: build/moc/moc_PropertyDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PropertyDialog.o build/moc/moc_PropertyDialog.cpp
 
-moc_PeopleDialog.o: moc_PeopleDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PeopleDialog.o moc_PeopleDialog.cpp
+build/obj/moc_PeopleDialog.o: build/moc/moc_PeopleDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PeopleDialog.o build/moc/moc_PeopleDialog.cpp
 
-moc_PeopleEditionDialog.o: moc_PeopleEditionDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PeopleEditionDialog.o moc_PeopleEditionDialog.cpp
+build/obj/moc_PeopleEditionDialog.o: build/moc/moc_PeopleEditionDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_PeopleEditionDialog.o build/moc/moc_PeopleEditionDialog.cpp
 
-moc_TimeBetweenTwoFeetDialog.o: moc_TimeBetweenTwoFeetDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_TimeBetweenTwoFeetDialog.o moc_TimeBetweenTwoFeetDialog.cpp
+build/obj/moc_TimeBetweenTwoFeetDialog.o: build/moc/moc_TimeBetweenTwoFeetDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_TimeBetweenTwoFeetDialog.o build/moc/moc_TimeBetweenTwoFeetDialog.cpp
 
-moc_SecondScreenWindow.o: moc_SecondScreenWindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_SecondScreenWindow.o moc_SecondScreenWindow.cpp
+build/obj/moc_SecondScreenWindow.o: build/moc/moc_SecondScreenWindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_SecondScreenWindow.o build/moc/moc_SecondScreenWindow.cpp
 
-moc_TextDialog.o: moc_TextDialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_TextDialog.o moc_TextDialog.cpp
+build/obj/moc_TextDialog.o: build/moc/moc_TextDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/moc_TextDialog.o build/moc/moc_TextDialog.cpp
 
 ####### Install
 

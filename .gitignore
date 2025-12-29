@@ -36,3 +36,4 @@ out.html
 payload.json
 
 .qmake.stash
+/app/Joker/build
