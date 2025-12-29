@@ -7,7 +7,10 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QMouseEvent>
 #include <QFontDatabase>
+#include <QProcess>
+#include <QProgressDialog>
 
 #include "PhTools/PhDebug.h"
 
@@ -23,6 +26,9 @@
 #include "AboutDialog.h"
 #include "PreferencesDialog.h"
 #include "PeopleDialog.h"
+#include "TextDialog.h"
+#include "PhStrip/PhStripDoc.h"
+#include "PhStrip/PhStripText.h"
 
 JokerWindow::JokerWindow(JokerSettings *settings) :
 	PhEditableDocumentWindow(settings),
@@ -52,6 +58,9 @@ JokerWindow::JokerWindow(JokerSettings *settings) :
 {
 	// Setting up UI
 	ui->setupUi(this);
+
+	ui->menuEdit->menuAction()->setVisible(true);
+	ui->menuControl->menuAction()->setVisible(true);
 
 	QFontDatabase::addApplicationFont(QCoreApplication::applicationDirPath() + PATH_TO_RESSOURCES + "/Bookerly-BoldItalic.ttf");
 	QFontDatabase::addApplicationFont(QCoreApplication::applicationDirPath() + PATH_TO_RESSOURCES + "/Cappella-Regular.ttf");
@@ -136,6 +145,8 @@ JokerWindow::JokerWindow(JokerSettings *settings) :
 	this->connect(ui->videoStripView, &PhGraphicView::beforePaint, _strip.clock(), &PhClock::elapse);
 
 	this->connect(ui->videoStripView, &PhGraphicView::paint, this, &JokerWindow::onPaint);
+
+	ui->videoStripView->installEventFilter(this);
 
 	_videoLogo.setFilename(":/Joker/phonations");
 	_videoLogo.setTransparent(true);
@@ -369,13 +380,46 @@ bool JokerWindow::eventFilter(QObject * sender, QEvent *event)
 	case QEvent::MouseButtonPress:
 		{
 			QMouseEvent *mouseEvent = (QMouseEvent*)event;
-			if((sender == this) && (mouseEvent->buttons() & Qt::RightButton)) {
-				/// - Right mouse click on the video open the video file dialog.
-				if(mouseEvent->y() < this->height() * (1.0f - _settings->stripHeight()))
-					on_actionOpen_Video_triggered();
-				else /// - Left mouse click on the strip open the strip file dialog.
-					on_actionOpen_triggered();
-				return true;
+			if (sender == ui->videoStripView && (mouseEvent->buttons() & Qt::RightButton)) {
+				if (_doc) {
+					int width = ui->videoStripView->width();
+					int height = ui->videoStripView->height();
+					int x = 0;
+					int y = 0;
+
+					PhTime timePerPixel = (PhTime)_settings->horizontalTimePerPixel();
+					long syncBar_X_FromLeft = width / 6;
+					long delay = (int)(24 * _settings->screenDelay() *  _strip.clock()->rate());
+					PhTime clockTime = _strip.clock()->time() + delay;
+
+					PhTime clickTime = (mouseEvent->x() - x - syncBar_X_FromLeft) * timePerPixel + clockTime;
+					float clickYRatio = (float)(mouseEvent->y() - y) / height;
+
+					foreach(PhStripText *text, _doc->texts()) {
+						if (clickTime >= text->timeIn() && clickTime <= text->timeOut()) {
+							// Check if the click is within the vertical bounds of the text
+							// The text height is relative to the strip height
+							// text->y() is the top position (0.0 to 1.0)
+							// text->height() is the height (0.0 to 1.0)
+							// We add a small tolerance for easier clicking
+							float tolerance = 0.05f; 
+							if (clickYRatio >= text->y() - tolerance && clickYRatio <= text->y() + text->height() + tolerance) {
+								TextDialog dialog(this, _doc, currentTime());
+								dialog.setText(text);
+								if (dialog.exec() == QDialog::Accepted) {
+									text->setTimeIn(dialog.timeIn());
+									text->setTimeOut(dialog.timeOut());
+									text->setPeople(dialog.people());
+									text->setContent(dialog.content());
+									text->setY(dialog.track() / 5.0f);
+									_doc->setModified(true);
+									ui->videoStripView->update();
+								}
+								return true;
+							}
+						}
+					}
+				}
 			}
 			float stripHeight = this->height() * _settings->stripHeight();
 			if((mouseEvent->pos().y() > (this->height() - stripHeight) - 10)
@@ -1312,4 +1356,162 @@ void JokerWindow::onSecondScreenClosed(bool closedFromUser)
 	}
 	if(closedFromUser)
 		_settings->setVideoSecondScreen(false);
+}
+
+void JokerWindow::on_actionAdd_text_triggered()
+{
+	if (!_doc) return;
+
+	PhTime time = currentTime();
+	TextDialog dialog(this, _doc, time);
+	if (dialog.exec() == QDialog::Accepted) {
+		PhStripText *text = new PhStripText(
+			dialog.timeIn(),
+			dialog.people(),
+			dialog.timeOut(),
+			dialog.track() / 5.0f,
+			dialog.content(),
+			0.25f
+		);
+
+		_doc->addText(text);
+		ui->videoStripView->update();
+	}
+}
+
+void JokerWindow::on_actionExport_Video_triggered()
+{
+	// Pause playback
+	_strip.clock()->setRate(0.0);
+
+	QString fileName = QFileDialog::getSaveFileName(this, tr("Export Video"), _settings->lastDocumentFolder(), "Video (*.mp4)");
+	if (fileName.isEmpty())
+		return;
+
+	if (!fileName.endsWith(".mp4"))
+		fileName += ".mp4";
+
+	// Get video parameters
+	int width = ui->videoStripView->width();
+	int height = ui->videoStripView->height();
+	// Ensure even dimensions for some codecs
+	if (width % 2 != 0) width--;
+	if (height % 2 != 0) height--;
+
+	PhTime startTime = 0;
+	PhTime endTime = 0;
+
+	// Calculate the real end time of the document
+	bool usedVideoLength = false;
+#ifdef USE_VIDEO
+	if (_videoEngine.ready()) {
+		endTime = _videoEngine.length();
+		usedVideoLength = true;
+		PHDEBUG << "Using video length as endTime:" << endTime;
+	}
+#endif
+
+	PhTime buffer = 2 * 24000;
+
+	if (!usedVideoLength) {
+		foreach(PhStripText* text, _doc->texts()) {
+			if (text->timeOut() > endTime) endTime = text->timeOut();
+		}
+		foreach(PhStripText* text, _doc->texts(true)) {
+			if (text->timeOut() > endTime) endTime = text->timeOut();
+		}
+		foreach(PhStripDetect* detect, _doc->detects()) {
+			if (detect->timeOut() > endTime) endTime = detect->timeOut();
+		}
+		// Also check loops (start time only)
+		foreach(PhStripLoop* loop, _doc->loops()) {
+			if (loop->timeIn() > endTime) endTime = loop->timeIn();
+		}
+		endTime += buffer;
+	}
+
+	if (!usedVideoLength && endTime == buffer) {
+		// If document seems empty, try lastTime or default
+		if (_doc->lastTime() > 0) endTime = _doc->lastTime();
+		else endTime = 10 * 24000; // 10 seconds default
+	}
+	
+	// If the document starts significantly later (e.g. > 1 minute), adjust start time
+	// But for safety, let's check the first element time
+	PhTime firstElement = _doc->timeIn();
+	if (firstElement > 10 * 24000) {
+		// If first element is after 10 seconds, maybe we should start earlier?
+		// For now, let's keep startTime = 0 to be safe, or use videoTimeIn if available.
+		// startTime = _doc->videoTimeIn(); 
+		// Let's stick to 0 for now to ensure we don't cut the start.
+	}
+
+	PhTimeCodeType tcType = _doc->videoTimeCodeType();
+	// Force 60 FPS for export as requested
+	double fps = 60.0;
+	PhTime frameDuration = 24000 / 60;
+
+	QProcess ffmpeg;
+	QStringList args;
+	args << "-y" // Overwrite
+	     << "-f" << "image2pipe"
+	     << "-vcodec" << "bmp"
+	     << "-r" << QString::number(fps)
+	     << "-i" << "-"
+	     << "-vcodec" << "libx264"
+	     << "-pix_fmt" << "yuv420p"
+	     << "-s" << QString("%1x%2").arg(width).arg(height)
+	     << fileName;
+
+	ffmpeg.start("ffmpeg", args);
+	if (!ffmpeg.waitForStarted()) {
+		QMessageBox::critical(this, tr("Error"), tr("Could not start ffmpeg. Make sure it is installed."));
+		return;
+	}
+
+	QProgressDialog progress(tr("Exporting video..."), tr("Cancel"), 0, (endTime - startTime) / frameDuration, this);
+	progress.setWindowModality(Qt::WindowModal);
+
+	// Disconnect clock elapse to prevent auto-advancement during render
+	this->disconnect(ui->videoStripView, &PhGraphicView::beforePaint, _strip.clock(), &PhClock::elapse);
+
+	PhTime currentTime = startTime;
+	int frameCount = 0;
+
+	while (currentTime <= endTime) {
+		if (progress.wasCanceled()) {
+			ffmpeg.close();
+			// Reconnect clock
+			this->connect(ui->videoStripView, &PhGraphicView::beforePaint, _strip.clock(), &PhClock::elapse);
+			return;
+		}
+
+		_strip.clock()->setTime(currentTime);
+
+		// Render frame
+		QImage img = ui->videoStripView->renderPixmap(width, height).toImage();
+		img.save(&ffmpeg, "BMP");
+		
+		// Flow control to prevent RAM exhaustion
+		// Wait if we have more than ~3 frames buffered (approx 25MB for HD)
+		while (ffmpeg.bytesToWrite() > 30 * 1024 * 1024) {
+			if (ffmpeg.state() != QProcess::Running) break;
+			ffmpeg.waitForBytesWritten(100); // Wait up to 100ms
+			QCoreApplication::processEvents(); // Keep UI responsive
+		}
+
+		currentTime += frameDuration;
+		frameCount++;
+		progress.setValue(frameCount);
+		QCoreApplication::processEvents();
+	}
+
+	ffmpeg.closeWriteChannel();
+	ffmpeg.waitForFinished();
+	ffmpeg.close();
+
+	// Reconnect clock
+	this->connect(ui->videoStripView, &PhGraphicView::beforePaint, _strip.clock(), &PhClock::elapse);
+
+	QMessageBox::information(this, tr("Success"), tr("Video exported successfully to %1").arg(fileName));
 }

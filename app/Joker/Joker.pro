@@ -56,7 +56,8 @@ SOURCES += main.cpp \
 	PeopleDialog.cpp \
 	PeopleEditionDialog.cpp \
 	TimeBetweenTwoFeetDialog.cpp \
-    SecondScreenWindow.cpp
+    SecondScreenWindow.cpp \
+    TextDialog.cpp
 HEADERS += \
 	JokerWindow.h \
 	AboutDialog.h \
@@ -66,7 +67,8 @@ HEADERS += \
 	JokerSettings.h \
 	PeopleEditionDialog.h \
 	TimeBetweenTwoFeetDialog.h \
-    SecondScreenWindow.h
+    SecondScreenWindow.h \
+    TextDialog.h
 FORMS += \
 	JokerWindow.ui \
 	AboutDialog.ui \
@@ -74,7 +76,8 @@ FORMS += \
 	PropertyDialog.ui \
 	PeopleDialog.ui \
 	PeopleEditionDialog.ui \
-	TimeBetweenTwoFeetDialog.ui
+	TimeBetweenTwoFeetDialog.ui \
+    TextDialog.ui
 
 mac{
 	ICON = joker.icns

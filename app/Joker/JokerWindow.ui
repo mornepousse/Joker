@@ -64,9 +64,16 @@
     <addaction name="separator"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_as"/>
+    <addaction name="actionExport_Video"/>
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="actionProperties"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionAdd_text"/>
    </widget>
    <widget class="QMenu" name="menuControl">
     <property name="title">
@@ -138,6 +145,7 @@
     <property name="title">
      <string>Rythmo</string>
     </property>
+    <addaction name="actionAdd_text"/>
     <addaction name="actionSelect_character"/>
     <addaction name="actionHide_selected_peoples"/>
     <addaction name="separator"/>
@@ -151,6 +159,7 @@
     <addaction name="actionSet_distance_between_two_feet"/>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuControl"/>
    <addaction name="menuRythmo"/>
    <addaction name="menuVideo"/>
@@ -163,6 +172,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionAdd_text">
+   <property name="text">
+    <string>Add text...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionPlay_pause">
@@ -557,6 +574,11 @@
    </property>
    <property name="text">
     <string>Second screen</string>
+   </property>
+  </action>
+  <action name="actionExport_Video">
+   <property name="text">
+    <string>Export Video...</string>
    </property>
   </action>
  </widget>

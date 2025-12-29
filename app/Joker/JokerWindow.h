@@ -108,7 +108,7 @@ protected:
 	/// @param event The event
 	/// @return True if handled, false otherwise
 	///
-	bool eventFilter(QObject *sender, QEvent *event);
+	bool eventFilter(QObject *sender, QEvent *event) override;
 
 	///
 	/// @brief Give the ui->menuOpen_recent item to PhDocumentWindow
@@ -228,6 +228,10 @@ private slots:
 
 	void on_actionSave_as_triggered();
 
+	void on_actionExport_Video_triggered();
+
+	void on_actionAdd_text_triggered();
+
 	void on_actionSelect_character_triggered();
 
 	void on_actionForce_16_9_ratio_triggered(bool checked);
@@ -281,6 +285,7 @@ private slots:
 	void on_actionSecond_screen_triggered(bool checked);
 
 	void onSecondScreenClosed(bool closedFromUser);
+
 private:
 	PhTimeCodeType localTimeCodeType();
 	PhTimeCodeType synchroTimeCodeType();
