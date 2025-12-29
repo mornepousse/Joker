@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<joker>
-	<meta>
-		<media type="detx">test01.detx</media>
-		<media type="video" tcStamp="00:59:00:00" forceRatio="YES">test01.mov</media>
-		<state lastTimeCode="01:02:03:04"/>
-	</meta>
-</joker>
