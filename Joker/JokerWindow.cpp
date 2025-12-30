@@ -157,7 +157,7 @@ JokerWindow::JokerWindow(JokerSettings *settings) :
 	// Text List Dock
 	_textListDock = new QDockWidget(tr("Text List"), this);
 	_textListDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-	_textListWidget = new QTreeWidget(_textListDock);a
+	_textListWidget = new QTreeWidget(_textListDock);
 	_textListWidget->setColumnCount(4);
 	_textListWidget->setHeaderLabels(QStringList() << tr("Start") << tr("End") << tr("Character") << tr("Text"));
 	_textListWidget->setRootIsDecorated(false);
