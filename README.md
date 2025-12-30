@@ -39,7 +39,7 @@ In order to compile the project you will need to follow the instructions dependi
 
 You need to install Qt5 and ffmpeg development libraries.
 
-    sudo apt-get install qt5-default libavcodec-dev libavformat-dev libswscale-dev libavutil-dev portaudio19-dev libltc-dev
+    qt5-default libavcodec-dev libavformat-dev libswscale-dev libavutil-dev portaudio19-dev libltc-dev
 
 Then compile the project:
 
