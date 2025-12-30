@@ -11,6 +11,11 @@
 #include <QFontDatabase>
 #include <QProcess>
 #include <QProgressDialog>
+#include <QDockWidget>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+#include <QMenu>
+#include <QMenuBar>
 
 #include "PhTools/PhDebug.h"
 
@@ -147,6 +152,29 @@ JokerWindow::JokerWindow(JokerSettings *settings) :
 	this->connect(ui->videoStripView, &PhGraphicView::paint, this, &JokerWindow::onPaint);
 
 	ui->videoStripView->installEventFilter(this);
+	ui->videoStripView->setMouseTracking(true);
+
+	// Text List Dock
+	_textListDock = new QDockWidget(tr("Text List"), this);
+	_textListDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	_textListWidget = new QTreeWidget(_textListDock);a
+	_textListWidget->setColumnCount(4);
+	_textListWidget->setHeaderLabels(QStringList() << tr("Start") << tr("End") << tr("Character") << tr("Text"));
+	_textListWidget->setRootIsDecorated(false);
+	_textListDock->setWidget(_textListWidget);
+	addDockWidget(Qt::LeftDockWidgetArea, _textListDock);
+	_textListDock->hide();
+
+	QAction *toggleListAction = new QAction(tr("Toggle Text List"), this);
+	toggleListAction->setCheckable(true);
+	toggleListAction->setChecked(false);
+	connect(toggleListAction, &QAction::triggered, this, &JokerWindow::toggleTextList);
+	connect(_textListDock, &QDockWidget::visibilityChanged, toggleListAction, &QAction::setChecked);
+
+	ui->menuView->addAction(toggleListAction);
+
+	connect(_textListWidget, &QTreeWidget::itemSelectionChanged, this, &JokerWindow::onTextListSelectionChanged);
+	connect(_textListWidget, &QTreeWidget::itemDoubleClicked, this, &JokerWindow::onTextListItemDoubleClicked);
 
 	_videoLogo.setFilename(":/Joker/phonations");
 	_videoLogo.setTransparent(true);
@@ -318,6 +346,8 @@ bool JokerWindow::openDocument(const QString &fileName)
 	openVideoFile(_doc->videoFilePath());
 #endif
 
+	updateTextList();
+
 	return true;
 }
 
@@ -347,13 +377,95 @@ bool JokerWindow::eventFilter(QObject * sender, QEvent *event)
 	case QEvent::HoverMove:
 		{
 			QMouseEvent * mouseEvent = (QMouseEvent*)event;
+
+			// Handle text resizing logic
+			if (_resizingText && (mouseEvent->buttons() & Qt::LeftButton)) {
+				PhTime timePerPixel = (PhTime)_settings->horizontalTimePerPixel();
+				int deltaX = mouseEvent->x() - _resizeStartMouseX;
+				PhTime deltaTime = deltaX * timePerPixel;
+
+				if (_resizeMode == 1) { // Left handle
+					PhTime newTimeIn = _resizeOriginalTime + deltaTime;
+					if (newTimeIn < _resizingText->timeOut() && newTimeIn >= 0) {
+						_resizingText->setTimeIn(newTimeIn);
+						_doc->setModified(true);
+						ui->videoStripView->update();
+					}
+				} else if (_resizeMode == 2) { // Right handle
+					PhTime newTimeOut = _resizeOriginalTime + deltaTime;
+					if (newTimeOut > _resizingText->timeIn()) {
+						_resizingText->setTimeOut(newTimeOut);
+						_doc->setModified(true);
+						ui->videoStripView->update();
+					}
+				}
+				return true;
+			}
+
 			// Check if it is near the video/strip border
-			float stripHeight = this->height() * _settings->stripHeight();
-			if((mouseEvent->pos().y() > (this->height() - stripHeight) - 10)
-			   && (mouseEvent->pos().y() < (this->height() - stripHeight) + 10))
+			float stripHeightRatio = _settings->stripHeight();
+			int stripHeight = this->height() * stripHeightRatio;
+			int videoHeight = this->height() - stripHeight;
+
+			if((mouseEvent->pos().y() > videoHeight - 10)
+			   && (mouseEvent->pos().y() < videoHeight + 10)) {
 				QApplication::setOverrideCursor(Qt::SizeVerCursor);
-			else
+			} else if (sender == ui->videoStripView && mouseEvent->y() > videoHeight) {
+				// Check for text resize handles
+				if (_doc) {
+					int width = ui->videoStripView->width();
+					PhTime timePerPixel = (PhTime)_settings->horizontalTimePerPixel();
+					long syncBar_X_FromLeft = width / 6;
+					long delay = (int)(24 * _settings->screenDelay() *  _strip.clock()->rate());
+					PhTime clockTime = _strip.clock()->time() + delay;
+					PhTime mouseTime = (mouseEvent->x() - syncBar_X_FromLeft) * timePerPixel + clockTime;
+					float mouseYRatio = (float)(mouseEvent->y() - videoHeight) / stripHeight;
+
+					bool handleFound = false;
+					PhTime tolerance = 8 * timePerPixel; // 8 pixels tolerance
+					float vTolerance = 0.05f;
+
+					foreach(PhStripText *text, _doc->texts()) {
+						// Check vertical bounds first
+						if (mouseYRatio >= text->y() - vTolerance && mouseYRatio <= text->y() + text->height() + vTolerance) {
+							bool isOverLeft = qAbs(mouseTime - text->timeIn()) < tolerance;
+							bool isOverRight = qAbs(mouseTime - text->timeOut()) < tolerance;
+							bool isOverBody = mouseTime >= text->timeIn() && mouseTime <= text->timeOut();
+
+							if (isOverLeft) {
+								QApplication::setOverrideCursor(Qt::SizeHorCursor);
+								_strip.setHighlightedText(text);
+								_strip.setResizeMode(1);
+								handleFound = true;
+								break;
+							} else if (isOverRight) {
+								QApplication::setOverrideCursor(Qt::SizeHorCursor);
+								_strip.setHighlightedText(text);
+								_strip.setResizeMode(2);
+								handleFound = true;
+								break;
+							} else if (isOverBody) {
+								QApplication::setOverrideCursor(Qt::ArrowCursor);
+								_strip.setHighlightedText(text);
+								_strip.setResizeMode(0);
+								handleFound = true;
+								break;
+							}
+						}
+					}
+
+					if (!handleFound) {
+						QApplication::setOverrideCursor(Qt::ArrowCursor);
+						_strip.setHighlightedText(nullptr);
+						_strip.setResizeMode(0);
+					}
+					ui->videoStripView->update(); // Redraw to show/hide handles
+				} else {
+					QApplication::setOverrideCursor(Qt::ArrowCursor);
+				}
+			} else {
 				QApplication::setOverrideCursor(Qt::ArrowCursor);
+			}
 
 			if(_resizingStrip && (mouseEvent->buttons() & Qt::LeftButton)) {
 				float newStripHeight = 1.0 - ((float) mouseEvent->pos().y() /(float) this->height());
@@ -376,16 +488,72 @@ bool JokerWindow::eventFilter(QObject * sender, QEvent *event)
 	case QEvent::MouseButtonRelease:
 		PHDEBUG << "end resizing strip";
 		_resizingStrip = false;
+		if (_resizingText) {
+			_resizingText = nullptr;
+			_resizeMode = 0;
+			_strip.setResizeMode(0); // Reset visual feedback
+			ui->videoStripView->update();
+		}
 		break;
 	case QEvent::MouseButtonPress:
 		{
 			QMouseEvent *mouseEvent = (QMouseEvent*)event;
+
+			// Check for text resize click
+			if (sender == ui->videoStripView && (mouseEvent->buttons() & Qt::LeftButton)) {
+				float stripHeightRatio = _settings->stripHeight();
+				int stripHeight = this->height() * stripHeightRatio;
+				int videoHeight = this->height() - stripHeight;
+
+				if (mouseEvent->y() > videoHeight && _doc) {
+					int width = ui->videoStripView->width();
+					PhTime timePerPixel = (PhTime)_settings->horizontalTimePerPixel();
+					long syncBar_X_FromLeft = width / 6;
+					long delay = (int)(24 * _settings->screenDelay() *  _strip.clock()->rate());
+					PhTime clockTime = _strip.clock()->time() + delay;
+					PhTime mouseTime = (mouseEvent->x() - syncBar_X_FromLeft) * timePerPixel + clockTime;
+					float mouseYRatio = (float)(mouseEvent->y() - videoHeight) / stripHeight;
+
+					PhTime tolerance = 5 * timePerPixel;
+					float vTolerance = 0.05f;
+
+					foreach(PhStripText *text, _doc->texts()) {
+						if (mouseYRatio >= text->y() - vTolerance && mouseYRatio <= text->y() + text->height() + vTolerance) {
+							if (qAbs(mouseTime - text->timeIn()) < tolerance) {
+								_resizingText = text;
+								_resizeMode = 1;
+								_resizeOriginalTime = text->timeIn();
+								_resizeStartMouseX = mouseEvent->x();
+								return true; // Consume event
+							} else if (qAbs(mouseTime - text->timeOut()) < tolerance) {
+								_resizingText = text;
+								_resizeMode = 2;
+								_resizeOriginalTime = text->timeOut();
+								_resizeStartMouseX = mouseEvent->x();
+								return true; // Consume event
+							}
+						}
+					}
+				}
+			}
+
 			if (sender == ui->videoStripView && (mouseEvent->buttons() & Qt::RightButton)) {
 				if (_doc) {
 					int width = ui->videoStripView->width();
 					int height = ui->videoStripView->height();
+
+					float stripHeightRatio = 0.0f;
+					if(!_settings->hideStrip())
+						stripHeightRatio = _settings->stripHeight();
+
+					int stripHeight = height * stripHeightRatio;
+					int videoHeight = height - stripHeight;
+
+					// If click is above the strip, ignore
+					if (mouseEvent->y() < videoHeight)
+						break;
+
 					int x = 0;
-					int y = 0;
 
 					PhTime timePerPixel = (PhTime)_settings->horizontalTimePerPixel();
 					long syncBar_X_FromLeft = width / 6;
@@ -393,7 +561,7 @@ bool JokerWindow::eventFilter(QObject * sender, QEvent *event)
 					PhTime clockTime = _strip.clock()->time() + delay;
 
 					PhTime clickTime = (mouseEvent->x() - x - syncBar_X_FromLeft) * timePerPixel + clockTime;
-					float clickYRatio = (float)(mouseEvent->y() - y) / height;
+					float clickYRatio = (float)(mouseEvent->y() - videoHeight) / stripHeight;
 
 					foreach(PhStripText *text, _doc->texts()) {
 						if (clickTime >= text->timeIn() && clickTime <= text->timeOut()) {
@@ -1514,4 +1682,58 @@ void JokerWindow::on_actionExport_Video_triggered()
 	this->connect(ui->videoStripView, &PhGraphicView::beforePaint, _strip.clock(), &PhClock::elapse);
 
 	QMessageBox::information(this, tr("Success"), tr("Video exported successfully to %1").arg(fileName));
+}
+
+void JokerWindow::toggleTextList()
+{
+	if (_textListDock->isVisible())
+		_textListDock->hide();
+	else
+		_textListDock->show();
+}
+
+void JokerWindow::updateTextList()
+{
+	_textListWidget->clear();
+	if (!_doc) return;
+
+	foreach(PhStripText *text, _doc->texts()) {
+		QTreeWidgetItem *item = new QTreeWidgetItem(_textListWidget);
+		item->setText(0, PhTimeCode::stringFromTime(text->timeIn(), localTimeCodeType()));
+		item->setText(1, PhTimeCode::stringFromTime(text->timeOut(), localTimeCodeType()));
+		if (text->people())
+			item->setText(2, text->people()->name());
+		item->setText(3, text->content());
+		item->setData(0, Qt::UserRole, QVariant::fromValue((qlonglong)text->timeIn()));
+		item->setData(0, Qt::UserRole + 1, QVariant::fromValue((qlonglong)text));
+	}
+}
+
+void JokerWindow::onTextListSelectionChanged()
+{
+	QList<QTreeWidgetItem*> selected = _textListWidget->selectedItems();
+	if (selected.isEmpty()) return;
+
+	PhTime time = (PhTime)selected.first()->data(0, Qt::UserRole).toLongLong();
+	setCurrentTime(time);
+}
+
+void JokerWindow::onTextListItemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+	Q_UNUSED(column);
+	PhStripText *text = (PhStripText*)item->data(0, Qt::UserRole + 1).toLongLong();
+	if (text) {
+		TextDialog dialog(this, _doc, currentTime());
+		dialog.setText(text);
+		if (dialog.exec() == QDialog::Accepted) {
+			text->setTimeIn(dialog.timeIn());
+			text->setTimeOut(dialog.timeOut());
+			text->setPeople(dialog.people());
+			text->setContent(dialog.content());
+			text->setY(dialog.track() / 5.0f);
+			_doc->setModified(true);
+			ui->videoStripView->update();
+			updateTextList();
+		}
+	}
 }

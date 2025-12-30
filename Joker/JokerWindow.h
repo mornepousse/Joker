@@ -33,6 +33,10 @@
 #include "JokerSettings.h"
 #include "TimeBetweenTwoFeetDialog.h"
 
+#include <QDockWidget>
+#include <QTreeWidget>
+#include <QHeaderView>
+
 namespace Ui {
 class JokerWindow;
 }
@@ -82,6 +86,11 @@ public slots:
 	/// \param elapsedTime
 	///
 	void timeCounter(PhTime elapsedTime);
+
+	void toggleTextList();
+	void updateTextList();
+	void onTextListSelectionChanged();
+	void onTextListItemDoubleClicked(QTreeWidgetItem *item, int column);
 
 protected:
 	///
@@ -326,6 +335,15 @@ private:
 
 	bool _setCurrentTimeToVideoTimeIn;
 	bool _syncTimeInToDoc;
+
+	// Resize text feature
+	PhStripText *_resizingText = nullptr;
+	int _resizeMode = 0; // 0: None, 1: Left, 2: Right
+	PhTime _resizeOriginalTime = 0;
+	int _resizeStartMouseX = 0;
+
+	QDockWidget *_textListDock;
+	QTreeWidget *_textListWidget;
 };
 
 #endif // MAINWINDOW_H

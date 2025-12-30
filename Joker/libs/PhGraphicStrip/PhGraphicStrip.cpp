@@ -324,6 +324,24 @@ void PhGraphicStrip::draw(int x, int y, int width, int height, int nextTextAreaX
 				gText.setColor(computeColor(text->people(), selectedPeoples, invertedColor));
 
 				gText.draw();
+
+				if (text == _highlightedText) {
+					PhGraphicSolidRect handle;
+					handle.setColor(Qt::yellow);
+					handle.setZ(0);
+					handle.setY(gText.y());
+					handle.setHeight(gText.height());
+					handle.setWidth(4); // 4 pixels wide handle
+
+					if (_resizeMode == 1 || _resizeMode == 0) { // Left handle
+						handle.setX(gText.x());
+						handle.draw();
+					}
+					if (_resizeMode == 2 || _resizeMode == 0) { // Right handle
+						handle.setX(gText.x() + gText.width() - 4);
+						handle.draw();
+					}
+				}
 			}
 
 			PhPeople * people = text->people();

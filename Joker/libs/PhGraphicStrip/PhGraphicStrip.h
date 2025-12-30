@@ -107,6 +107,9 @@ public:
 		return _infos;
 	}
 
+	void setHighlightedText(PhStripText *text) { _highlightedText = text; }
+	void setResizeMode(int mode) { _resizeMode = mode; } // 0: None, 1: Left, 2: Right
+
 private:
 	PhGraphicStripSettings * _settings;
 
@@ -145,6 +148,9 @@ private:
 	QColor computeColor(PhPeople *people, QList<PhPeople *> selectedPeoples, bool invertColor);
 
 	QStringList _infos;
+
+	PhStripText *_highlightedText = nullptr;
+	int _resizeMode = 0;
 };
 
 #endif // PHGRAPHICSTRIP_H
